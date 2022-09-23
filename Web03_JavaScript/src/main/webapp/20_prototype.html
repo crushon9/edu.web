@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Prototype</title>
+</head>
+<body>
+	<h1>자바스크립트 생성자 함수 prototype 변경</h1>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+
+		// 생성자 함수
+		function Unit(name, money) {
+			this.name = name;
+			this.money = money;
+		}
+
+		// 생성자 함수의 prototype을 변경 :
+		Unit.prototype.gas = 0;
+		Unit.prototype.attack = function() {
+			output.innerHTML += this.name + '이(가) 공격합니다.' + '<br>';
+		}
+
+		output.innerHTML += '<hr>';
+		var unit1 = new Unit('드론', 50);
+		for (x in unit1) {
+			output.innerHTML += x + ' : ' + unit1[x] + '<br>';
+		}
+		unit1.attack();
+
+		output.innerHTML += '<hr>';
+		var unit2 = new Unit('프로브', 50);
+		for (x in unit2) {
+			output.innerHTML += x + ' : ' + unit2[x] + '<br>';
+		}
+		unit2.attack();
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

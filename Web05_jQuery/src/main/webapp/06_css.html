@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>css</title>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>jQuery CSS 변경 방법</h1>
+	<p style="">jQuery CSS</p>
+
+	<hr>
+	<h1>CSS 클래스 추가/제거</h1>
+	<p id="p1">단락1</p>
+	<p id="p2">단락2</p>
+	<p id="p3">단락3</p>
+	<button id="add-class">클래스 추가</button>
+	<button id="remove-class">클래스 제거</button>
+	<button id="toggle-class">클래스 토글</button>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// jQuery를 사용한 css 변경
+			// - $(선택자).css('property', value);
+			$('p').click(function() {
+				$(this).css({
+					font : '200% serif',
+					backgroundColor : 'lightgreen',
+					border : '1px solid grey',
+					textAlign : 'center'
+				});
+			});
+
+			// addClass('클래스이름') : HTML 요소에 클래스 속성을 추가
+			// removeClass('클래스이름') : HTML 요소에 클래스 속성을 제거
+			// toggleClass('클래스이름') : HTML 요소에 클래스 속성 추가/제거 토글
+			// **콘솔창에서 클래스 변경 내용 확인가능
+			$('#add-class').click(function() {
+				// 한번 클릭으로 여러 개의 요소에 클래스 적용
+				$('#p1').addClass('important');
+				$('#p2, #p3').addClass('c1'); 
+			});
+
+			$('#remove-class').click(function() {
+				$('#p2, #p3').removeClass('c1');
+			});
+
+			$('#toggle-class').click(function() {
+				$('#p2, #p3').toggleClass('c1');
+			});
+		}); // end document
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

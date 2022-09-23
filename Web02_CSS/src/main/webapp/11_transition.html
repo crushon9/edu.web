@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Transition</title>
+
+<style>
+input {
+  width: 100px;
+  /* transition : 프로퍼티 시간 효과; */
+  transition: width 0.5s ease-in-out;
+}
+input:focus {
+  width: 300px;
+}
+
+h1 {
+  transition: 2s;
+}
+
+h1:hover {
+  color: red;
+  font-size: 300%;
+  transform: rotate(-20deg);
+}
+
+</style>
+</head>
+<body>
+<h1>CSS Transition</h1>
+<input type="text" placeholder="Search">
+</body>
+</html>
+

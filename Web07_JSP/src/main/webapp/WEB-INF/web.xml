@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Web07_JSP</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 필터 설정 -->
+  <filter>
+	<filter-name>TestFilter</filter-name>
+	<!-- filter-mapping 의 filter-name과 일치-->
+	<filter-class>edu.web.jsp02.TestFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>TestFilter</filter-name>
+  	<url-pattern>/17_filter_test.jsp</url-pattern>
+  	<url-pattern>/*</url-pattern> <!-- 존재하는 모든 하위 경로 -->
+  	<url-pattern>/member/*</url-pattern> <!-- member 폴더의 모든 하위 페이지 -->
+  </filter-mapping>
+  
+</web-app>

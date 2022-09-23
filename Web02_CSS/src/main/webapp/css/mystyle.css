@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.div2 { /* 클래스 이름 */
+  color: green;
+  font-size: 300%;
+}
+
+h1 {
+  background: cyan;
+  color : red;
+}

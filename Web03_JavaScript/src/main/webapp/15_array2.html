@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array2</title>
+</head>
+<body>
+	<h1>자바스크립트 배열2</h1>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+
+		// 자바스크립트의 배열은 서로 다른 타입의 원소를 지정할 수 있음
+		var arr = [ '둘리', 100000, true ];
+
+		for (x in arr) {
+			output.innerHTML += arr[x] + '<br>';
+		}
+
+		output.innerHTML += arr + '<br>'; // arr.toString()과 동일
+		output.innerHTML += '<hr>';
+
+		// 배열의 원소 추가/삭제
+		var cities = [ '서울', '대전', '부산', '광주' ];
+
+		// 배열의 추가 - 인덱스사용방법 : 순서없이 들어갈수있기때문에 위험
+		cities[cities.length] = '평양';
+		cities[10] = '인천'; // 순서없이 뻔뻔하게 들어감
+		output.innerHTML += cities + '<br>';
+
+		// * 배열의 함수
+		// push(원소) : 배열의 가장 마지막 위치에 새로운 원소를 추가
+		// 중간에 빈공간이 있어도 마지막 위치 뒤에 추가됨
+		cities.push('울산');
+		output.innerHTML += cities + '<br>';
+
+		// pop() : 배열의 가장 마지막 원소를 삭제
+		cities.pop();
+		output.innerHTML += cities + '<br>';
+
+		// shift() : 배열의 첫 번째 원소를 삭제. 배열 원소들의 인덱스를 모두 변경
+		cities.shift();
+		output.innerHTML += cities + '<br>';
+
+		// unshift() : 배열의 첫 번째 위치에 새로운 원소를 추가. 나머지 원소들은 뒤로 이동
+		cities.unshift('제주');
+		output.innerHTML += cities + '<br>';
+
+		var list = new Array(); // object를 원소로 갖음
+		console.log(typeof list);
+		list.push({	test : '안녕' });
+		output.innerHTML += list[0].test + '<br>';
+		
+		// list 특정 데이터 삭제(공백으로 비우기)
+		list[0] = '';
+	</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Function2</title>
+</head>
+<body>
+	<h1>자바스크립트 함수(function)</h1>
+	<div id="output"></div>
+	<script type="text/javascript">
+		// * 자바스크립트의 overloading
+		// - 자바스크립트 함수는 매개변수의 개수와 타입을 체크하지 않기 때문에 함수 overloading을 할 수 없음
+		// 	 즉 같은 이름으로 함수를 정의하면 나중에 정의한 함수가 이전 함수의 정의를 덮어씀 overriding
+		var output = document.getElementById('output');
+
+		function add(x) {
+			return x + 1;
+		}
+
+		function add(x, y) { // 나중에 선언된 함수로 덮어씌워짐
+			return x + y;
+		}
+
+		var result = add(1, 2);
+		output.innerHTML += 'result = ' + result + '<br>';
+
+		result = add(1); // overloading안되기때문에 결과값 NaN
+		output.innerHTML += 'result = ' + result + '<br>';
+
+		// NaN(Not A Number) 알수없는 연산결과가 발생할 경우 출력됨
+		// isNaN(a) : a가 숫자가 아니면 true (문자열도 true반환), 숫자면 false를 리턴하는 함수
+		function addIf(x, y) {
+			if (isNaN(x) || isNaN(y)) {
+				return '숫자가 아니므로 덧셈을 할 수 없습니다';
+			}
+			return x + y;
+		}
+		result = addIf('q', 't');
+		output.innerHTML += 'result = ' + result + '<br>';
+
+		result = addIf(2, 2);
+		output.innerHTML += 'result = ' + result + '<br>';
+	</script>
+
+</body>
+</html>

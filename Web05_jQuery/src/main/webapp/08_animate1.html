@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>animate1</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style type="text/css">
+#panel {
+	border: 1px solid grey;
+	background-color: lime;
+	width: 200px;
+	height: 200px;
+}
+</style>
+</head>
+<body>
+	<h1>jQuery 애니메이션 함수들</h1>
+	<button type="button" id="hidebtn">Hide</button>
+	<button type="button" id="showbtn">Show</button>
+	<button type="button" id="togglebtn">Toggle</button>
+	<button type="button" id="updownbtn">Up/Down</button>
+	<button type="button" id="stopbtn">Stop</button>
+	<div id="panel">Animation</div>
+
+	<script type="text/javascript">
+		// 애니메이션 함수들
+		// - hide(speed, callback), fadeOut(speed, callback), slideUp()
+		// - show(speed, callback), fadeIn(speed, callback), slideDown()
+		// - toggle(speed, callback), fadeToggle(speed, callback), slideToggle()
+		// callback : 함수가 수행된 뒤에 할일
+
+		$(function() {
+			$('#hidebtn').click(function() {
+				//hide(speed, callback)
+				$('#panel').hide(3000, function() {
+					alert('hi');
+				});
+			});
+
+			$('#showbtn').click(function() {
+				//show(speed, callback)
+				$('#panel').show(3000, function() {
+					$('#panel').hide(3000);
+				});
+			});
+
+			$('#togglebtn').click(function() {
+				//slideToggle()
+				$('#panel').slideToggle(3000);
+			});
+
+			$('#updownbtn').click(function() {
+				// slideUp().slideDown() 연결해서 쓸수도 있구나?
+				$('#panel').slideUp(1000).slideDown(1000);
+			});
+
+			$('#stopbtn').click(function() {
+				$('#panel').stop();
+			});
+
+		}); // end document
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

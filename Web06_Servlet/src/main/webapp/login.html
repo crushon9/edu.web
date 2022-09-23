@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<h1>Login 페이지</h1>
+	<h2>Get 요청 방식</h2>
+	<form action="loginTest" method="GET"> <!-- action뒤에 url이 나오는구나 -->
+		<input type="text" name="userid" placeholder="ID"><br>
+		<input type="password" name="password" placeholder="PASSWORD"><br>
+		<input type="submit" value="로그인">
+ <!-- 로그인 버튼을 누르면 해당 정보를 request에 담아서 URL : /loginTest 즉 LoginServlet으로 보냄
+ 거기서 PrintWriter를 통해 HTML코드를 작성해서
+ response.getWriter(); 페이지를 새로 생성하여 띄움-->
+	</form>
+
+	<h2>Post 요청 방식</h2>
+	<form action="loginTest" method="POST">
+		<input type="text" name="userid" placeholder="ID"><br>
+		<input type="password" name="password" placeholder="PASSWORD"><br>
+		<input type="submit" value="로그인">
+	</form>
+
+</body>
+</html>

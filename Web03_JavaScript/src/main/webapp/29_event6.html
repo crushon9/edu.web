@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Event</title>
+</head>
+<body>
+	<h1>자바스크립트에서 이벤트 핸들러 등록 방법</h1>
+	<div id="output"></div>
+	<button id="btn1">버튼1</button>
+	<input id="btn2" type="button" value="버튼2">
+
+	<script type="text/javascript">
+		// 이벤트 핸들러 등록 방법 1 :
+		// - element.event = function() {};
+
+		// 이벤트 핸들러 등록 방법 2 : 
+		// - element.addEventListener(event, function, useCapture);
+		// - event : 이벤트 이름(click, mouseover, ....)
+		// - function : 이벤트 핸들러(리스너) -> 필수
+		// - useCapture : true / fasle -> 선택(기본값 false)
+		// - 장점 : 하나의 이벤트에 여러 개의 이벤트 핸들러를 등록할 수 있음
+
+		// 등록 방법1
+		// 가장 마지막에 등록한 이벤트 핸들러만 동작
+		btn1.onclick = function() {
+		};
+
+		btn1.onclick = function() {
+			output.innerHTML = new Date().toLocaleString();
+			alert('등록 방법1');
+		};
+
+		// 등록 방법2
+		// 여러개의 이벤트 동작
+		function displayDate() {
+			output.innerHTML = new Date().toLocaleString();
+		}
+
+		btn2.addEventListener('click', displayDate);
+		btn2.addEventListener('click', function() {
+			alert('등록 방법2');
+		});
+	</script>
+
+</body>
+</html>
+
+
+
+
+

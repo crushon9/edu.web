@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Info</title>
+</head>
+<body>
+	<h1>당신의 정보를 입력해주세요</h1>
+	<form action="forward" method="get">
+		<input type="text" name="name" placeholder="이름"><br>
+		<input type="number" name="age" placeholder="나이"><br>
+		<input type="email" name="email" placeholder="이메일"><br>
+		<input type="number" name="money" placeholder="재산"><br>
+		<input type="submit" value="제출">
+		<!-- 제출을 누르는 순간 form의 정보들을 request에 포장하여 /forward url로 접근하면 거기서 
+		ForwardTestServlet클래스의 객체가 생성되면서 request를 매개변수로 doGet()메소드를 호출하고
+		dispatcher에 경로 /result.jsp를 담아서
+		dispatcher.forward(request, response);로 /result.jsp 내용의 창을 띄움
+		-->
+	</form>
+</body>
+</html>

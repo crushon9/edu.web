@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Variable</title>
+</head>
+<body>
+	<h1>자바스크립트 변수 선언과 사용</h1>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+		console.log(typeof output); // typeof : 변수 타입 확인, output: object
+		
+		// * 변수 초기화 방법
+		// - var 변수 이름 = 초기값;
+		// - var 변수 이름;
+		// 	 변수 이름 = 초기값;
+		// * 자바스크립트의 변수 타입
+		// 		1) 숫자(number)타입 : 정수, 실수
+		// 		2) 문자열(string)타입 : '문자열', "문자열"
+		// 		3) 논리형(boolean)타입 : true, false
+		// 		4) 객체(object)타입 : 속성 컬렉션(속성으로 데이터를 수집한 상태)
+		// 		5) null 타입
+
+		var x = 123; // 변수의 선언과 초기화를 동시에
+		var y; // 변수 선언 뒤
+		y = 123; // 초기화
+		var sum = x + y;
+		output.innerHTML += 'sum = ' + sum + '<br>';
+
+		// * 중요) 자바스크립트는 변수 선언을 var로 통합한다.
+		// x는 숫자 타입의 변수지만, 문자를 저장하면 문자 타입으로 자동 형 변환된다.
+		x = '안녕'; // 문자열로 자동 형 변환
+		y = '자바스크립트';
+		sum = x + y;
+		output.innerHTML += 'sum = ' + sum + '<br>';
+
+		var check = confirm('확인은 참 취소는 거짓');
+		if (check) {
+			output.innerHTML += '참(true)<br>';
+		} else {
+			output.innerHTML += '거짓(false)<br>';
+		}
+		
+	</script>
+</body>
+</html>

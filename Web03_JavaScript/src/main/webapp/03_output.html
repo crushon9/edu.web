@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Output</title>
+</head>
+<body>
+	<h1>자바스크립트 출력 방법</h1>
+	<h2>document.write() 함수 사용</h2>
+	<script type="text/javascript">
+		document.write('<p>안녕하세요</p>');
+	</script>
+	<button onclick="test1()">Click!</button>
+	<hr>
+	<h2>innerHTML 속성 사용</h2>
+	<button onclick="test2()">Click!</button>
+	<div id="output">여기가출력자리</div>
+	<hr>
+	<h2>다이얼로그(dialog) 사용</h2>
+	<button onclick="showAlert()">alert</button>
+	<button onclick="showConfirm()">confirm</button>
+	<button onclick="showPrompt()">prompt</button>
+	<div id="output2">여기가출력자리</div>
+	<hr>
+	<h2>콘솔 로그 출력</h2>
+	<button onclick="showLog()">console.log</button>
+	
+	<script type="text/javascript">
+		/* 
+		 * JavaScript 디스플레이 속성
+			- innerHTML : HTML 요소에 작성
+			- document.write() : HTML 문서에 작성
+			- window.alert() : 경고 박스에 작성
+			- console.log() : 브라우저 콘솔 창에 작성
+		 */
+		function test1() {
+			document.write('<p>test1() 호출</p>');
+			//(주의) HTML 문서 로딩이 끝난 후 document.write()를 호출하면
+			// 문서 전체의 내용을 덮어쓰게 됨
+		}
+
+		function test2() {
+			var output = document.getElementById('output');
+			output.innerHTML = 'test2() 호출';
+		}
+
+		function showAlert() {
+			alert(1 + 2 + '입니다.');
+		}
+
+		function showConfirm() {
+			var result = confirm('삭제하시겠습니까?');
+			// confirm의 선택 결과를 리턴 : 확인(true), 취소(false)
+			document.getElementById('output2').innerHTML = result;
+		}
+
+		function showPrompt() {
+			var result = prompt('이름입력', '이름');
+			// prompt에 입력된 결과를 리턴 : 문자열
+			document.getElementById('output2').innerHTML = result;
+		}
+
+		function showLog() {
+			console.log('테스트입니다.');
+		}
+	</script>
+
+</body>
+</html>

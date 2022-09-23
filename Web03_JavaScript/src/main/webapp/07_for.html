@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For</title>
+</head>
+<body>
+	<h1>자바스크립트 for문, 전역/지역 변수</h1>
+	<div id="output"></div>
+	<script type="text/javascript">
+		// * 자바스크립트의 전역변수, 지역변수 선언
+		// - 자바스크립트의 전역변수(Global Variable) :
+		//   <script> 태그 안에서 선언된 변수
+		//	 선언된 위치와 상관없이 변수 선언 부분은 script 첫 부분으로 이동
+		//	 즉 아직 할당되지 않았을때 undefined
+		// 주의) 전역변수 보다는 함수내에서 지역변수로 선언하여 사용하는 것이 안전
+
+		// - 자바스크립트의 지역변수(Local Variable) :
+		//   함수 내부에서 선언된 변수
+		var output = document.getElementById('output');
+		output.innerHTML += 'undefinedVar = ' + undefinedVar + '<br>'; // undefined 밑에 선언은됐는데 값이 안들어가있음
+		// 선언은 밑에서 해도 오류 안남 ;;; 
+		var undefinedVar = 1; // 전역변수 선언
+
+		for (var globalVar = 1; globalVar <= 6; globalVar++) { // var x : x는 전역변수
+			output.innerHTML += '<h'+ globalVar +'>heading' + globalVar + '</h'+ globalVar +'>';
+		}
+		output.innerHTML += globalVar + '<br>';
+
+		function test() {
+			var localVar = 10; // 지역변수
+			output.innerHTML += 'test() 내부 : globalVar = ' + globalVar + '<br>'; //전역변수가능
+			output.innerHTML += 'test() 내부 : localVar = ' + localVar + '<br>'; //지역변수가능
+		}
+		// 함수호출(call)
+		test();
+
+		output.innerHTML += 'test() 외부 : localVar = ' + localVar + '<br>';
+		//n is not defined 아예선언조차안된거
+	</script>
+
+</body>
+</html>

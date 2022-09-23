@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>If</title>
+</head>
+<body>
+	<h1>JavaScript if문, 비교연산자, 삼항연산자</h1>
+	<input type="text" id="input">
+	<button onclick="input()">전송</button>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		function input() {
+			// var output = document.getElementById('output');
+			// 변수선언안해도 살아있는 output이라는 변수..
+			// 알고보니 id를 자동으로 변수선언안해도 찾아가서 innerHTML해줌
+			// 원래 }안에서만 변수가 인식되는게 맞음
+			var x = document.getElementById('input').value;
+			console.log(x);
+			console.log(typeof x);
+
+			if (x > 0) {
+				output.innerHTML += '양수<br>';
+			} else if (x == 0) {
+				output.innerHTML += '0<br>';
+			} else if (x < 0) { // 범위를 이렇게 지정하지 않으면 문자연산함
+				output.innerHTML += '음수<br>';
+			}
+		}
+		// ==, !=, <, > : 자동 형변환이 발생하여 값만 비교
+		var age = '16'; // 문자열
+		if (age == 16) { //숫자 16과 문자열 age를 자동형변환하여 비교해줌
+			output.innerHTML += '== 연산자 결과 : 참<br>'; // 결과 
+		} else {
+			output.innerHTML += '== 연산자 결과 : 거짓<br>';
+		}
+		// ===, !== : 타입과 값을 함께 비교
+		var age = '18'; // age 변수가 중복선언됐네?
+		if (age === 18) {
+			output.innerHTML += '=== 연산자 결과 : 참<br>';
+		} else {
+			output.innerHTML += '=== 연산자 결과 : 거짓<br>'; // 결과 
+		}
+		xx = 100; // var 변수선언안해도 담김 실화?
+		// var 안하면 전역변수처럼 된다네?
+		console.log(xx);
+		var msg = (xx > 0) ? 'xx는양수' : 'xx는음수';
+		output.innerHTML += msg + '<br>'; // 뭐야 output 정의된 } 넘었는데 읽히네?
+	</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>contact</title>
+</head>
+<body>
+	<h1>연락처 프로그램</h1>
+
+	<label for="name">이름 : </label>
+	<input type="text" id="name" required="required" placeholder="이름입력">
+	<br>
+	<label for="phone">연락처 : </label>
+	<input type="tel" id="phone" required="required" placeholder="연락처입력">
+	<br>
+	<label for="email">이메일 : </label>
+	<input type="email" id="email" required="required" placeholder="이메일입력">
+	<br>
+	<br>
+	<button onclick="contactInsert();">입력</button>
+	<button onclick="contactSelect();">전체검색</button>
+	<label for="index">인덱스 : </label>
+	<input type="number" id="index" required="required" placeholder="인덱스입력">
+	<button onclick="contactDelete();">삭제</button>
+	<hr>
+	<br>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		var list = new Array();
+
+		function contactInsert() {
+			list.push({
+				name : document.getElementById('name').value,
+				phone : document.getElementById('phone').value,
+				email : document.getElementById('email').value
+			});
+			alert('[Index ' + (list.length - 1) + '] 입력완료');
+			contactSelect();
+		}
+		function contactSelect() {
+			var output = document.getElementById('output');
+			output.innerHTML = ''; // 초기화
+			for (i in list) {
+				output.innerHTML += i + '번> 이름 : ' + list[i].name
+						+ ' | 전화번호 : ' + list[i].phone + ' | 이메일 : '
+						+ list[i].email + '<br>';
+			}
+		}
+		function contactDelete() {
+			var indexValue = document.getElementById('index').value;
+			if (list.length > indexValue) {
+				list.splice(indexValue, 1);
+				alert('[Index ' + indexValue + '] 삭제완료');
+			} else {
+				alert('없는 인덱스 입니다');
+			}
+			contactSelect();
+		}
+	</script>
+
+</body>
+</html>

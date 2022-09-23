@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>String</title>
+</head>
+<body>
+	<h1>자바스크립트 String</h1>
+	<!-- 
+	* 자바스크립트 String
+	- 문자열 객체와 문자열 상수가 존재
+	- 문자열은 내장 메소드를 포함
+	- 특수기호(Escape Sequence) 사용에 유의
+ -->
+
+	<p id="demo"></p>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var x = "";
+
+		/* x = "Hello. My name is "Mok". Nice to meet you!"; */
+		// Escape Sequence : 문자열 내에서 특수한 기능을 수행하는 문자(' " \)
+		x = "Hello. My name is \"Mok\". Nice to meet you!";
+		var demo = document.getElementById("demo");
+		demo.innerHTML += x + '<br>';
+
+		x = "The character \\ is called backslash" // 백슬래쉬 두개써도 하나만나옴
+		demo.innerHTML += x + '<br>';
+
+		var output = document.getElementById('output');
+
+		var str1 = '안녕하세요'; // 문자열 상수(String Literal)
+		var str2 = '안녕하세요';
+		if (str1 == str2) {
+			output.innerHTML += '같은 객체<br>'; // 문자열상수는 내용이 같으면 같은 객체
+		} else {
+			output.innerHTML += '다른 객체<br>';
+		}
+
+		var str3 = new String('안녕하세요'); // 인스턴스 새롭게 생성
+		var str4 = new String('안녕하세요');
+		if (str3 == str4) {
+			output.innerHTML += '같은 객체<br>';
+		} else {
+			output.innerHTML += '다른 객체<br>'; // 인스턴스문자열은 같아도 다른 객체
+		}
+		output.innerHTML += '<hr>';
+		var str5 = '안녕, 자바스크립트! "자바스크립트"는 쉬워요.';
+		output.innerHTML += str5 + '<br>';
+
+		/* String Method */
+		// length : 문자열 길이 출력. 메소드가 아니라 property
+		// indexOf() : 해당 문자열의 시작 위치를 리턴
+		// lastIndexOf() : 해당 문자열이 여러개라면 마지막 시작 위치를 리턴
+		output.innerHTML += 'length : ' + str5.length + '<br>';
+		output.innerHTML += 'indexOf(자바스크립트) : ' + str5.indexOf('자바스크립트')
+				+ '<br>';
+		output.innerHTML += 'lastIndexOf(자바스크립트) : '
+				+ str5.lastIndexOf('자바스크립트') + '<br>';
+
+		// search() : 문자열을 검색, 정규표현식(/ /) 사용가능
+		output.innerHTML += 'search(자바스크립트) : ' + str5.search('자바스크립트')
+				+ '<br>';
+		output.innerHTML += 'search(자바스크립트) : ' + str5.search(/자바스크립트/)
+				+ '<br>';
+
+		// match() : 일치하는 문자열을 리턴
+		output.innerHTML += 'match(자바스크립트) : ' + str5.match('자바스크립트') + '<br>';
+		output.innerHTML += 'match(자바스크립트) : ' + str5.match(/자바스크립트/g) + '<br>';
+		output.innerHTML += '찾은개수 : ' + str5.match(/자바스크립트/g).length + '<br>'; // 배열의 길이
+		// JavaScript 정규표현식 : /패턴/욥션
+		// 옵션
+		// 1) g(global) : 일치하는 모든 패턴을 찾음
+		// 2) i(case-insensitive) : 대소문자 구분없이 패턴을 찾음
+
+		// 문자열 자르기
+		// - slice(startIndex, endIndex)
+		// - startIndex는 포함한 위치, endIndex는 위치의 -1까지 문자열 자르기
+		// - 음수 인덱스 사용 가능
+		output.innerHTML += 'slice() : ' + str5.slice(4, 10) + '<br>';
+		output.innerHTML += 'slice() : ' + str5.slice(-13, -7) + '<br>';
+
+		// - substring(startIndex, endIndex)
+		// - 음수 인덱스 사용 불가
+		output.innerHTML += 'substring() : ' + str5.substring(4, 10) + '<br>';
+
+		// - substr(startIndex, length)
+		// - startIndex부터, length만큼 문자열 자르기
+		output.innerHTML += 'substr() : ' + str5.substr(4, 6) + '<br>';
+		output.innerHTML += '<hr>';
+
+		var str6 = 'Hello, javascript. "javascript" is easy';
+		// - replace(original, change)
+		// - original string을 change string으로 변경
+		output.innerHTML += 'replace() : '
+				+ str6.replace('javascript', '자바스크립트') + '<br>';
+		output.innerHTML += 'replace() : '
+				+ str6.replace(/javascript/g, '자바스크립트') + '<br>';
+
+		// 대소문자 변경
+		// toUpperCase() : 대문자로 변경
+		// toLowerCase() : 소문자로 변경
+		var str7 = 'JavaScript';
+		output.innerHTML += 'toUpperCase() : ' + str7.toUpperCase() + '<br>';
+		output.innerHTML += 'toLowerCase() : ' + str7.toLowerCase() + '<br>';
+		output.innerHTML += '<hr>';
+
+		// split(String) :
+		// String을 기분으로 문자열을 나눠서 배열 형태로 저장
+		var str8 = 'admin,admin213,admin@test.com';
+		var info = str8.split(','); // 배열이 된것임
+		output.innerHTML += 'split length : ' + info.length + '<br>'; // 배열길이
+		output.innerHTML += info.toString() + '<br>'; // 배열붙여서합쳐지고
+		for (x in info) { // x : index , info : 배열
+			output.innerHTML += x + ' 번째 : ' + info[x] + '<br>';
+		}
+	</script>
+
+</body>
+</html>

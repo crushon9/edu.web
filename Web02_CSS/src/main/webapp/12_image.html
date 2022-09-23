@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Image</title>
+<style type="text/css">
+.gallery {
+  float: left;
+  margin: 5px;
+  border: 2px solid grey;
+  width: 150px;
+  height: 150px;
+}
+.gallery:hover {
+  border: 4px solid red;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  transition: 2s;
+}
+.gallery img:hover {
+  transform: rotate(20deg);
+}
+.desc {
+  text-align: center;
+  padding: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>CSS Image &amp; Transition</h1>
+<div class="gallery">
+  <a href="images/paris.jpg">
+    <img alt="파리" src="images/paris.jpg" width="300px" height="200px">
+  </a>
+  <div class="desc">파리입니다. 가보고 싶네요</div>
+</div>
+
+<div class="gallery">
+  <a href="images/newyork.jpg">
+    <img alt="뉴욕" src="images/newyork.jpg" width="300px" height="200px">
+  </a>
+  <div class="desc">뉴욕입니다.</div>
+</div>
+
+<div class="gallery">
+  <a href="images/sanfran.jpg">
+    <img alt="샌프란시스코" src="images/sanfran.jpg" width="300px" height="200px">
+  </a>
+  <div class="desc">샌프란시스코입니다. 가보고 싶네요</div>
+</div>
+
+<div class="gallery">
+  <a href="images/fjords.jpg">
+    <img alt="어디일까요" src="images/fjords.jpg" width="300px" height="200px">
+  </a>
+  <div class="desc">어디일까요?</div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+

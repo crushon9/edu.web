@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>While</title>
+</head>
+<body>
+	<h1>자바스크립트 while문</h1>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+		var x = 1;
+		while (x <= 9) {
+			output.innerHTML += '2 X ' + x + ' = ' + 2 * x + '<br>';
+			x++;
+		}
+		output.innerHTML += '<hr>';
+		for (var i = 2; i <= 9; i++) {
+			output.innerHTML += '----' + i + '단----<br>';
+			for (var j = 1; j <= 9; j++) {
+				output.innerHTML += i + ' X ' + j + ' = ' + i * j + '<br>';
+			}
+		}
+	</script>
+</body>
+</html>

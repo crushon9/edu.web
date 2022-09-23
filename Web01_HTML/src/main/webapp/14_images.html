@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Images</title>
+</head>
+<body>
+	<!-- 
+	* img 속성
+	- alt(alternate) : 이미지 설명 (시각장애인등등..)
+	- src(source) : 이미지 출처(경로)
+	- title : 이미지 타이틀
+	- style : 이미지 스타일
+	- width, height : 이미지 넓이, 높이
+	 -->
+
+	<img alt="프랑스 파리" src="paris.jpg">
+	<!-- 경로Current source : http://localhost:8080/Web01_HTML/paris.jpg -->
+	<!-- 현재페이지(14_images.html)와 같은 폴더(webapp)에 위치한 이미지 파일 -->
+	<br>
+
+	<img alt="프랑스 파리" src="images/paris.jpg">
+	<!-- 경로Current source : http://localhost:8080/Web01_HTML/images/paris.jpg -->
+	<!-- Web01_HTML/images/paris.jpg == webapp/images/paris.jpg 추상적으로 같은개념-->
+	<!-- 현재페이지(14_images.html)와 같은 폴더(webapp)의 하위폴더 images에 위치한 이미지 파일 -->
+	<!-- 이미지는 이미 서버에 올라가있고 링크형태로 14_images.html에서 불러옴 -->
+	<br>
+
+	<img alt="프랑스 파리" src="/images/paris.jpg">
+	<!-- 경로Current source : http://localhost:8080/images/paris.jpg -->
+	<!-- 현재페이지(14_images.html)의 초기루트(localhost:8080)에 위치한 images폴더에 있는 이미지 파일 -->
+	<br>
+
+</body>
+</html>

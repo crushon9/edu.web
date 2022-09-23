@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+	background: #dfdfdf;
+}
+
+.form-login {
+	width: 60%;
+	background: white;
+	padding: 20px;
+	margin: auto;
+}
+
+/* Attribute Selector(속성 선택자) : [속성이름="속성값"] */
+input[type="text"], input[type="password"], select {
+	display: inline-block;
+	width: 100%;
+	padding: 8px 0px;
+	margin: 8px 8px;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid grey;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+	outline: none;
+	border-bottom: 2px solid red;
+}
+
+input[type="submit"] {
+	width: 100%;
+	margin: 8px 8px;
+	background: lightpink;
+	color: white;
+	border: none;
+	cursor: pointer; /* 커서 손가락모양 */
+}
+
+input[type="submit"]:hover {
+	background: hotpink;
+}
+</style>
+<meta charset="UTF-8">
+<title>Form</title>
+</head>
+<body>
+	<h1>CSS Form &amp; 속성 선택자(Attribute Selector)</h1>
+	<div class="form-login">
+		<form action="result.html" method="get">
+			<label for="userid">아이디</label>
+			<input id="userid" type="text" name="userid" placeholder="아이디 입력">
+			<label for="userpw">비밀번호</label>
+			<input id="userpw" type="password" name="userpw" placeholder="비밀번호 입력">
+			<label for="usertype">로그인 타입</label>
+			<select id="usertype" name="usertype">
+				<option>관리자</option>
+				<option>일반 사용자</option>
+			</select>
+			<input type="submit" value="로그인">
+		</form>
+	</div>
+</body>
+</html>

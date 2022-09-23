@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Link</title>
+</head>
+<body>
+	<!-- HTML 링크는 하이퍼 링크라고 불림 -->
+
+	<!-- 지역링크 : 주소를 다 적지 않아도 접근가능-->
+	<a href="04_text_format.html">text_format 페이지</a>
+	<br>
+
+	<!-- 외부 주소 링크 : 주소를 모두 적어야 함-->
+	<a href="http://172.16.7.31:8080/Web00_prepare/index.html">목쌤 페이지로</a>
+	<br>
+
+	<!-- 타겟 속성 : target attribute 
+	_blank : 새 창이나 탭에서 링크 문서 열기
+	_self : 현재 창이나 탭에서 링크 문서 열기
+	_parent : 부모 프레임에 열기
+	_top : 프레임 밖에서 현재 창이나 탭에 링크 문서 열기
+	-->
+	<a href="https://www.google.com" target="_blank">구글</a>
+	
+	<br>
+
+	<!-- 이미지와 링크 사용 (title은 마우스 올려두면 나오는 글귀)-->
+	<a href="02_basic.html" target="_blank"> <img alt="금문교"
+		src="images/sanfran.jpg" title="basic 페이지로"
+		style="width: 300px; height: 300px"> &lt;&lt;클릭
+	</a>
+	<br>
+
+	<!-- 페이지 내 링크 이동 : id 속성을 사용 -->
+	<p><a href="#c4">Chapter 4 이동</a></p> <!-- 해당 id위치를 맨위로 이동함 -->
+	<p><a href="#c8">Chapter 8 이동</a></p>
+	<h2>Chapter 1</h2>
+	<p>HTML</p>
+	<h2>Chapter 2</h2>
+	<p>CSS</p>
+	<h2>Chapter 3</h2>
+	<p>JavaScript</p>
+	<h2 id="c4">Chapter 4</h2>
+	<p>Bootstrap</p>
+	<h2>Chapter 5</h2>
+	<p>jQuery</p>
+	<h2>Chapter 6</h2>
+	<p>Servlet</p>
+	<h2>Chapter 7</h2>
+	<p>JSP</p>
+	<h2 id="c8">Chapter 8</h2>
+	<p>AJax</p>
+
+</body>
+</html>

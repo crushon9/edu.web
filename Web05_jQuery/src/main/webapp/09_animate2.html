@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>animate2</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style type="text/css">
+#panel {
+	border: 1px solid grey;
+	background-color: lime;
+	width: 100px;
+	height: 100px;
+	position: relative;
+}
+</style>
+</head>
+<body>
+	<h1>jQuery animate() 함수</h1>
+	<div id="panel">jQuery animate</div>
+
+	<script type="text/javascript">
+		// animate 메소드
+		// - animate(params, speed, callback)
+		// - params : 변경될 형태값
+		// - speed : animate 속도
+		// - callback : 이벤트가 실행된 후에 실행할 기능 ?? 
+		$(function() {
+			$('#panel').mouseover(function() {
+				$('#panel').animate({
+					left : '+=100px',
+					top : '+=100px',
+					fontSize : '150%',
+					opacity : '0.5'
+				}, 3000);
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

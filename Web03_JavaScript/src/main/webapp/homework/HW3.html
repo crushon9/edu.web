@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HW3</title>
+</head>
+<body>
+	<h1>질럿과 마린의 대결</h1>
+	<img alt="gateway" src="../images/gateway.JPG" width="200px"
+		id="gateway">
+	<img alt="zilot" src="../images/zilot.png" width="50px" id="imgZilot"
+		style="margin-right: 100px">
+	<img alt="marine" src="../images/marine.png" width="50px" id="imgMarine">
+	<img alt="barrack" src="../images/barrack.JPG" width="200px"
+		id="barrack">
+
+	<div id="output"></div>
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+		var zilotImg = document.getElementById('imgZilot');
+		var marineImg = document.getElementById('imgMarine');
+
+		// 생성자 함수
+		function Unit(name, hp, power, defence) {
+			this.name = name;
+			this.hp = hp;
+			this.power = power;
+			this.defence = defence;
+
+			this.attack = function(Unit) {
+				var damage = this.power - Unit.defence;
+				// 예외처리 : damage가 음수가 되면 damage가 0이 되도록
+				if (damage < 0) {
+					damage = 0;
+				}
+
+				Unit.hp = Unit.hp - damage;
+
+				// 예외처리 : 공격당한 유닛의 hp가 0이하가 되면 사망처리
+				if (Unit.hp <= 0) {
+					alert(Unit.name + '이(가) 사망했습니다.');
+					output.innerHTML = '';
+					return;
+				}
+
+				output.innerHTML += this.name + '이(가) 공격했다. <br>';
+				output.innerHTML += Unit.name + '은(는) 공격을 받았다. <br>';
+				output.innerHTML += Unit.name + '은(는) ' + damage
+						+ '의 데미지를 입었다.<br>';
+				output.innerHTML += Unit.name + '의 남은 HP : ' + Unit.hp + '<br>';
+				output.innerHTML += '<hr>';
+			}
+		}
+
+		// 객체 선언
+		var zilot = new Unit('질럿', 100, 20, 10);
+		var marine = new Unit('마린', 50, 15, 5);
+
+		zilotImg.onclick = function() {
+			alert('내 목숨을 아이어에!');
+			zilot.attack(marine);
+		};
+
+		marineImg.onclick = function() {
+			alert('한 판 붙어볼까, 애송이?');
+			marine.attack(zilot);
+		};
+	</script>
+</body>
+</html>

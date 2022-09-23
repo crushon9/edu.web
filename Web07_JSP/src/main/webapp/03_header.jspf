@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- jspf : Java Server Page Fragment, JSP 파편 -->
+<style>
+.header {
+	background-color: lime;
+	font-size: 200%;
+	text-align: center;
+	height: 60px;
+}
+</style>
+<%!String header = "헤더 변수";%>
+<div class="header">여기는 header 입니다</div>

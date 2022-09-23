@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+th, td {
+	border-bottom: 1px solid gray;
+	border-collapse: collapse;
+	text-align: center;
+}
+/* collapse : 서로 이웃하는 테이블이나 셀의 테두리선을 겹쳐서 표현 합니다. */
+table {
+	width: 30%
+}
+
+thead tr {
+	background-color: #ebebeb;
+}
+
+caption {
+	text-align: right;
+	font-size: 80%;
+}
+
+/* :nth-child(even/odd/n) - 짝수, 홀수, n번재 자식 요소 */
+</style>
+<title>Table</title>
+</head>
+<body>
+	<h1>CSS Table</h1>
+	<table>
+		<caption>급여 (단위:만원)</caption>
+		<thead>
+			<tr>
+				<th>월</th>
+				<th>급여액</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>9월</td>
+				<td>380</td>
+			</tr>
+			<tr>
+				<td>10월</td>
+				<td>400</td>
+			</tr>
+			<tr>
+				<td>11월</td>
+				<td>420</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>합계</td>
+				<td>1200</td>
+			</tr>
+		</tfoot>
+
+	</table>
+
+</body>
+</html>

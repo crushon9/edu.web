@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array1</title>
+</head>
+<body>
+	<h1>자바스크립트 배열(Array)</h1>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var output = document.getElementById('output');
+
+		// 자바스크립트에서 배열 선언/초기화 방법1:
+		// var 배열이름 = [원소1, 원소2, ...];
+		var movies = [ '한산', '헌트', '범죄도시2', '뽀로로' ];
+		for (var i = 0; i < movies.length; i++) {
+			output.innerHTML += movies[i] + '<br>';
+		}
+
+		for (x in movies) {
+			output.innerHTML += x + ' : ' + movies[x] + '<br>';
+		}
+
+		// 배열 선언/초기화 방법 2
+		var games = new Array('스타크래프트', 'LOL');
+	</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Input Type 01</title>
+</head>
+<body>
+	<h1>여러 가지 input type</h1>
+	<!-- form에서 method를 지정하지 않으면 get방식이 default -->
+	<form action="result.html">
+		아이디 : (*) <br> <input type="text" name="userid" required="required"><br>
+		비밀번호 : <br> <input type="password" name="password" required><br>
+		<!-- required : 반드시 입력 not null 느낌-->
+		이메일 : <br> <input type="email" name="email"><br>
+		나이	: <br> <input type="number" name="age"><br>
+		전화번호 : <br> <input type="tel" name="tel"><br>
+		생일 : <br> <input type="date" name="date"><br>
+		<input type="submit" value="회원가입" formtarget="_blank">
+		<input type="reset"	value="취소">
+	</form>
+</body>
+</html>

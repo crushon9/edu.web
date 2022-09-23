@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>redirect</title>
+</head>
+<body>
+	<h1>당신의 정보를 입력해주세요</h1>
+	<form action="redirect" method="get">
+		<input type="text" name="name" placeholder="이름"><br>
+		<input type="number" name="age" placeholder="나이"><br>
+		<input type="email" name="email" placeholder="이메일"><br>
+		<input type="number" name="money" placeholder="재산"><br>
+		<input type="submit" value="제출">
+	</form>
+	<!-- 여기서 정보를 입력받아서 제출을 누르면 URL : /redirect 즉 RedirectServlet클래스 객체 생성되면서
+	거기서 request에서 꺼낸 데이터, 주소정보 /result.jsp를 조합하여 location문자열로 만들어서
+	response.sendRedirect(location);를 통해 클라이언트에게 다시 요청하라고 응답함
+	클라이언트는 /result.jsp페이지에 다시 요청하여 최종적으로 서버는 /result.jsp 결과페이지를 응답해줌 -->
+</body>
+</html>

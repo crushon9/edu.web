@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Object2</title>
+</head>
+<body>
+	<h1>자바스크립트 객체</h1>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		// 객체는 데이터를 의미하는 프로퍼티(property)와
+		// 데이터를 참조하여 동작(behavior)을 의미하는 메소드(method)로 구성된 집합이다. 
+		var person = {
+			name : '유재석',
+			// object 안에 value로 object를 넣음
+			phone : {
+				home : '02-1234-5678',
+				mobile : '010-1234-5678'
+			},
+			// object 안에 value로 배열을 넣음
+			email : [ 'test@test.com', 'yoo@test.com' ],
+			// 프로퍼티 값이 함수일 경우, 일반 함수와 구분하기 위해 메소드라 부른다.
+			// 즉, 메소드는 객체에 제한되어 있는 함수를 의미한다.
+			// 자바에서는 함수는 모든 클래스의 객체니깐 메소드라고 부르는건가???
+			information : function() {
+				return this.name + ', ' + this.phone.home + ', '
+						+ this.email[0];
+			} // this : 객체 person
+		};
+
+		var output = document.getElementById('output');
+		output.innerHTML += '이름 : ' + person.name + '<br>';
+		output.innerHTML += '집전화 : ' + person.phone.home + '<br>';
+		output.innerHTML += '핸드폰 : ' + person.phone.mobile + '<br>';
+		output.innerHTML += '이메일1 : ' + person.email[0] + '<br>';
+		output.innerHTML += '이메일2 : ' + person.email[1] + '<br>';
+		output.innerHTML += '전체 정보 : ' + person.information() + '<br>';
+
+		// for 문으로는 어떻게 하지?
+		output.innerHTML += '<hr>';
+		for (x in person) {
+			if (x == 'phone') {
+				for (y in person['phone']) {
+					output.innerHTML += x + ' : ' + y + ' : ' + person.phone[y]
+							+ '<br>';
+				}
+			} else {
+				output.innerHTML += x + ' : ' + person[x] + '<br>';
+			}
+		}
+	</script>
+
+
+</body>
+</html>

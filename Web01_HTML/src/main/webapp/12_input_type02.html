@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Input Type 02</title>
+</head>
+<body>
+	<h1>여러 가지 form 요소들</h1>
+	<form action="result.html">
+	<!-- 체크박스, 라디오 버튼은 선택된 객체의 value 값을 파라미터로 전송 -->
+	<!-- 라디오 버튼은 name이 같은 것끼리 묶임 -->
+		<input type="radio" name="gender" value="male">남자
+		<input type="radio" name="gender" value="female">여자
+		<br>
+		<input type="checkbox" name="hobby" value="movie">영화
+		<input type="checkbox" name="hobby" value="music">음악
+		<input type="checkbox" name="hobby" value="webtoon">웹툰
+		<br>
+		<select name="coffee">
+			<option>아메리카노</option>
+			<option>라떼</option>
+			<option>카푸치노</option>
+		</select>
+		<br>
+		<input type="file" name="profile">
+		<br>
+		<input type="submit" value="제출" formtarget="_blank">
+	</form>
+
+</body>
+</html>

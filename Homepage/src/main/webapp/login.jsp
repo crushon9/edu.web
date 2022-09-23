@@ -48,6 +48,10 @@
 		if (wrongApproach == "fail") {
 			out.print("<script>alert('잘못된 접근입니다');</script>");
 		}
+		String sessionInvalid = (String) request.getAttribute("sessionInvalid");
+		if (sessionInvalid == "fail") {
+			out.print("<script>alert('세션이 유효하지 않습니다');</script>");
+		}
 	%>
 </body>
 </html>

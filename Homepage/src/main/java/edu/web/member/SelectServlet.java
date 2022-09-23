@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/select.do")
 public class SelectServlet extends HttpServlet {
@@ -20,10 +21,10 @@ public class SelectServlet extends HttpServlet {
 	// doGet() 메소드에서 처리
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("userid") != null) {
-			// login-result.jsp에서 전송받은 userid를 가져옴
-			String userid = request.getParameter("userid");
-
+		// session에서 전송받은 userid를 가져옴
+		HttpSession session = request.getSession();
+		String userid = (String) session.getAttribute("userid");
+		if (userid != null) {
 			// DB에서 userid에 해당하는 데이터를 select
 			MemberVO vo = dao.selectById(userid);
 			System.out.println("회원정보조회 결과 : " + vo);
@@ -38,8 +39,8 @@ public class SelectServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login-result.jsp");
 				dispatcher.forward(request, response);
 			}
-		} else { // URL로 잘못 접근했을때 예외 처리
-			request.setAttribute("wrongApproach", "fail");
+		} else { // 세션이 만료되어 접근했을때 예외처리
+			request.setAttribute("sessionInvalid", "fail");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 		}

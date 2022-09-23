@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String emailAgree = request.getParameter("emailAgree");
-		String[] interest = request.getParameterValues("interest");
+		String[] interest = request.getParameterValues("interest"); // 여러개의 데이터를 배열로 넣는 메소드 getParameterValues
 		String phone = request.getParameter("phone");
 		String introduce = request.getParameter("introduce");
 		MemberVO vo = new MemberVO(userid, password, email, emailAgree, interest, phone, introduce);

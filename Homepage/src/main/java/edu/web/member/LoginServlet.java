@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 			// 로그인 세션 생성
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);
-			session.setMaxInactiveInterval(30);
+			session.setMaxInactiveInterval(20);
 			// login-result.jsp 이동
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login-result.jsp");
 			dispatcher.forward(request, response);

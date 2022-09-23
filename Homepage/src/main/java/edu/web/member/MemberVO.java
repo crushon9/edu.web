@@ -3,6 +3,7 @@ package edu.web.member;
 import java.util.Arrays;
 
 public class MemberVO {
+	// VO 는 외래키를 포함하여 테이블컬럼과 완전히 똑같이 만드는것이 좋다
 	private String userid;
 	private String password;
 	private String email;
@@ -62,7 +63,7 @@ public class MemberVO {
 	}
 
 	public String getInterestJoin() {
-		String result = (interest == null) ? "없음" : String.join(", ", interest);
+		String result = (interest == null) ? "없음" : String.join(",", interest);
 		return result;
 	}
 

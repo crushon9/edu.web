@@ -9,13 +9,6 @@
 </head>
 <body>
 	<%
-	// 세션만료검사
-	String userid = (String) session.getAttribute("userid");
-	if (userid == null) {
-		out.print("<script>alert('세션이 유효하지 않습니다');</script>");
-		out.print("<script>location.href='login.jsp'</script>");
-		return;
-	}
 	// DB에서 가져온 vo (SelectServlet에서 !null일때만 여기로 보냄)
 	MemberVO vo = (MemberVO) request.getAttribute("vo");
 	
@@ -35,9 +28,9 @@
 	<p>핸드폰 : <%=vo.getPhone() %></p>
 	<p>자기소개 : <%=vo.getIntroduce() %></p>
 	<!-- 회원 수정 버튼 -->
-	<a href="member-update.jsp?userid=<%=userid%>"><input type="button" value="정보수정"></a>
+	<a href="member-update.jsp"><input type="button" value="정보수정"></a>
 	<!-- 회원 탈퇴 버튼 생성 db에서 내용삭제 (탈퇴성공 알림창) -->
-	<a href="delete.do?userid=<%=userid%>"><input type="button" value="회원탈퇴"></a>
+	<a href="delete.do"><input type="button" value="회원탈퇴"></a>
 	
 </body>
 </html>

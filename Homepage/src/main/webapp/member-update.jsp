@@ -7,12 +7,12 @@
 <title>Member Update</title>
 </head>
 <body>
-	<%/* 세션만료 예외처리 */
+	<%
 	String userid = (String) session.getAttribute("userid");
-	if (userid == null) {
-		out.print("<script>alert('세션이 유효하지 않습니다');</script>");
-		out.print("<script>location.href='login.jsp'</script>");
-		return;
+	if (userid == null){
+		request.setAttribute("sessionInvalid", "fail");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		dispatcher.forward(request, response);
 	}
 	%>
 	

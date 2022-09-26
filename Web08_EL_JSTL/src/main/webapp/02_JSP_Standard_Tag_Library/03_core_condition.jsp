@@ -20,11 +20,36 @@
 	<c:if test="false">
 		<h2>실행안됨</h2>
 	</c:if>
+
 	<c:if test="${param.name == 'test' }">
+		<p>파라미터 name의 값이 'test'일때</p>
 		<p>결과 값이 true</p>
-		<p>파라미터 name의 값은 'test'</p>
+		<!-- URL 뒤에 ?name=test 추가하면 됨-->
+		<!-- param.(파라미터이름) == request.getParameter(파라미터이름)-->
 	</c:if>
-	
-	
+
+	<%-- 
+	* <c:choose> 태그
+	- 자바의 switch문과 if-else문을 섞음
+	--%>
+
+	<ul>
+		<c:choose>
+			<c:when test="${param.flag == 0 }">
+				<li>파라미터 flag의 값은 0입니다</li>
+			</c:when>
+			<c:when test="${param.flag == 1 }">
+				<li>파라미터 flag의 값은 1입니다</li>
+			</c:when>
+			<c:when test="${param.flag == 2 }">
+				<li>파라미터 flag의 값은 2입니다</li>
+			</c:when>
+			<c:otherwise>
+				<li>파라미터 flag의 값을 0, 1, 2 중에 입력해주세요!</li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+
+
 </body>
 </html>

@@ -16,15 +16,27 @@
 		// - 배열
 		// - 논리형
 		// - null
-		
+
 		// 문자열
-		var str = {"name" : "mok"};
+		var str = {
+			"name" : "mok"
+		};
 		// 숫자
-		var num = {"age" : 20};
+		var num = {
+			"age" : 20
+		};
 		// 객체
-		var obj = {"employee" : {"name" }};
-		
-		
+		var obj = {
+			"employee" : {
+				"name" : "mok",
+				"age" : 20,
+				"city" : "인천"
+			}
+		};
+
+		document.getElementById("output").innerHTML += obj + "<br>";
+		document.getElementById("output").innerHTML += obj.employee.name + "<br>";
+		document.getElementById("output").innerHTML += obj.employee.age	+ "<br>";
 	</script>
 </body>
 </html>

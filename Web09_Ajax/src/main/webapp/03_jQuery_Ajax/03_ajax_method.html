@@ -8,7 +8,7 @@
 <body>
 	<div id="output">변경될 텍스트</div>
 	<button>외부 컨텐츠 가져오기</button>
-	<!-- html -> ajax(아이디비번) -> servlet(아이비번처리 및 내용반환) -> html(반환된글자출력) -->
+	<!-- html -> ajax(아이디비번) -> servlet(아이디비번처리 및 내용반환) -> html(반환된글자출력) -->
 	<script type="text/javascript">
 		// * $.ajax()
 		// - ajax load 메소드를 간략화한 메소드
@@ -26,8 +26,8 @@
 					type : "get",
 					// 경로에 대하여..
 					// 가야할곳 http://localhost:8080/Web09_Ajax/ajax_test.do
-					// 오류 - url : "ajax_test.do" 일때 http://localhost:8080/Web09_Ajax/03_jQuery_Ajax/ajax_test.do
-					// 오류 - url : "/ajax_test.do" 일때 (루트밑바로) http://localhost:8080/ajax_test.do
+					// url : "ajax_test.do" 일때 -> http://localhost:8080/Web09_Ajax/03_jQuery_Ajax/ajax_test.do
+					// url : "/ajax_test.do" 일때(루트밑바로) -> http://localhost:8080/ajax_test.do
 					url : "../ajax_test.do", // ../ 부모디렉토리
 					data : {
 						id : "test", // request parameter를 id로 지정

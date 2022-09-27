@@ -31,8 +31,19 @@
 	<script type="text/javascript">
 		function loadDoc() {
 			var xhttp = new XMLHttpRequest(); // 브라우저 내장 request 객체
+			// onreadystatechange : readyState 속성이 변경될 때 호출할 함수를 정의
 			xhttp.onreadystatechange = function() {
-				// readyState 속성이 변경될 때 호출할 함수를 정의
+				// readyState : XMLHttpRequest의 상태
+				// 0: request not initialized
+				// 1: server connection established
+				// 2: request received
+				// 3: processiong request
+				// 4: request finished and response is ready
+
+				// status : HTML 메시지 코드
+				// 200: “OK”
+				// 403: “Forbidden”
+				// 404: “Page not founde”
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(this);
 					document.getElementById("output").innerHTML = this.responseText;
@@ -42,14 +53,15 @@
 
 			xhttp.open("GET", "01_demo_test.txt", true);
 			// open(method, url, async) : xhttp에 보낼 정보 세팅
-			// method : 요청타입 SET or POST
+			// method : 요청타입 GET or POST
 			// url : 파일 또는 요청 서버 위치
 			// async : true(비동기) or false(동기)
 			xhttp.send(); // 보냄
-		} 
+			// send() GET 방식으로 요청을 서버로 전송
+			// send(string) POST 방식으로 요청을 서버로 전송 string: 요청 파리미터 이름과 값
+		}
 		// 엥?? xhttp.open 랑 xhttp.send(); 실행되고 xhttp.onreadystatechange 실행된다는데?
 		// 한번 수행하면 연결끊어짐 stateless 즉 Request 초기화
-				
 	</script>
 </body>
 </html>

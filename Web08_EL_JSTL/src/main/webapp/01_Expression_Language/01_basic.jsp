@@ -9,13 +9,12 @@
 <body>
 	<%--
     EL(Expression Language)
-    - page, request, session, application 관련 데이터 출력 코드를 
-          간략하게 사용할 수 있는 표기법
+    - page, request, session, application 관련 데이터 출력 코드를 간략하게 사용할 수 있는 표기법
     - 자바빈 컴퍼넌트를 쉽게 접근하게 도와줌
     - 집합 객체(list, String[])에 대한 접근 방법을 제공
-    - 수치 연산, 관계 연산, 논리 연산자 제공
+    - 수치 연산, 관계 연산, 논리 연산자 제공 
     - 자바 클래스 메소드 호출 기능 제공
-    - 표현 언어만의 기본 객체 제공(범위 객체)
+    - EL만의 기본 객체 제공(범위 객체)
     
     EL 기본 객체
     - pageContext : JSP의 page 기본 객체와 동일
@@ -37,24 +36,23 @@
 	request.setAttribute("num2", 2);
 	session.setAttribute("num3", 3);
 	application.setAttribute("num4", 4);
-	
-	application.setAttribute("scope", "application");
-	request.setAttribute("scope", "request");
-	pageContext.setAttribute("scope", "pageContext");
-	session.setAttribute("scope", "session");
-
 	// 기존에 값을 가져오는 방법
 	int number1 = (Integer) pageContext.getAttribute("num1");
 	int number2 = (Integer) request.getAttribute("num2");
 	%>
-
 	<h1>변수 사용</h1>
 	<p>JSP 변수의 합 :<%=number1 + number2%></p> <!-- 기존에 가져오는 방법 -->
 	<p>page num1 : ${num1}</p>	<%-- pageContext.getAttribute("num1") --%>
 	<p>request num2 : ${num2}</p> <%-- request.getAttribute("num2") --%>
 	<p>session num3 : ${num3}</p> <%-- session.getAttribute("num3") --%>
 	<p>application num4 : ${num4}</p> <%-- application.getAttribute("num4") --%>
-
+	
+	<%
+	application.setAttribute("scope", "application");
+	request.setAttribute("scope", "request");
+	pageContext.setAttribute("scope", "pageContext");
+	session.setAttribute("scope", "session");
+	%>
 	<!-- 주의 사항 SCOPE 객체의 이름이 동일하면 가장 작은 범위를 불러옴
 	pageContext < request < session < application -->
 	<h1>EL 범위 테스트</h1>

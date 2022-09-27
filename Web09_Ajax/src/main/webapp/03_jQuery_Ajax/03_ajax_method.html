@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<title>Ajax Method</title>
+</head>
+<body>
+	<div id="output">변경될 텍스트</div>
+	<button>외부 컨텐츠 가져오기</button>
+	<!-- html -> ajax(아이디비번) -> servlet(아이비번처리 및 내용반환) -> html(반환된글자출력) -->
+	<script type="text/javascript">
+		// * $.ajax()
+		// - ajax load 메소드를 간략화한 메소드
+		// - 기본형태
+		//		$.ajax({name:value, name:value, ...});
+		// - name으로 선택할 수 있는 요소
+		// 		type : GET or POST
+		// 		url : 경로
+		// 		data : 보낼 데이터 패키지
+		// 		success : 호출 성공 시 리턴될 내용
+
+		$(document).ready(function() {
+			$('button').click(function() {
+				$.ajax({
+					type : "get",
+					// 경로에 대하여..
+					// 가야할곳 http://localhost:8080/Web09_Ajax/ajax_test.do
+					// 오류 - url : "ajax_test.do" 일때 http://localhost:8080/Web09_Ajax/03_jQuery_Ajax/ajax_test.do
+					// 오류 - url : "/ajax_test.do" 일때 (루트밑바로) http://localhost:8080/ajax_test.do
+					url : "../ajax_test.do", // ../ 부모디렉토리
+					data : {
+						id : "test", // request parameter를 id로 지정
+						pw : "1234" // request parameter를 pw로 지정
+					},
+					success : function(result) {
+						// result : ajax_test.do에서 response로 전달된 내용
+						$('#output').html(result); // result의 내용을 output에 저장
+					}
+				}); // end .ajax
+			}); // end button.click
+		}); // end document.ready
+	</script>
+
+</body>
+</html>

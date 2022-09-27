@@ -7,12 +7,21 @@
 <body>
 	<!-- 
 	* Ajax (Asynchronous JavaScript and XML)
+	* XML (eXtensible Markup Language)
+	
 	- Ajax를 사용하는 이유
 	1) 웹 페이지가 로드된 후 서버에서 데이터를 불러오기 위해
 	2) 새로고침 없이 페이지를 업데이트
 	3) 백그라운드에서 웹 서버에 데이터 전송
 	
-	* XML (eXtensible Markup Language)
+	- 데이터를 전송하고, 수신 후 처리할 때도 javaScript로 처리
+	
+	// 일반적인 경우
+	A 클라이언트JSP -> B 서버Servlet -> C 클라이언트JSP
+							     -> A 클라이언트JSP
+	// Ajax 경우 (비동기방식)
+	A 클라이언트JSP -> B 서버Servlet -> A 클라이언트JSP
+
  -->
 
 	<div id="output">
@@ -36,7 +45,7 @@
 			// method : 요청타입 SET or POST
 			// url : 파일 또는 요청 서버 위치
 			// async : true(비동기) or false(동기)
-			xhttp.send();
+			xhttp.send(); // 보냄
 		} 
 		// 엥?? xhttp.open 랑 xhttp.send(); 실행되고 xhttp.onreadystatechange 실행된다는데?
 		// 한번 수행하면 연결끊어짐 stateless 즉 Request 초기화

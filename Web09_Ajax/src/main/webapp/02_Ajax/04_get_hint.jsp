@@ -6,8 +6,8 @@ String input = request.getParameter("input");
 String apple = "apple";
 String banana = "banana";
 String coconut = "coconut";
-
 String result = "";
+
 if (apple.contains(input) && input.charAt(0) == 'a') {
 	result = apple;
 } else if (banana.contains(input) && input.charAt(0) == 'b') {
@@ -19,4 +19,4 @@ if (apple.contains(input) && input.charAt(0) == 'a') {
 }
 %>
 
-<span><%=result%></span>
+<%=result%>

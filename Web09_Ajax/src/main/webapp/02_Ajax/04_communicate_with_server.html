@@ -18,8 +18,11 @@
 		function showHint(str) {
 			console.log(str);
 
+			// 예외는 발생단계에서 바로 처리하는것이 좋음. 뒤로 보내지말고 return!
+			// 입력받은게 없는상태가 null은 아님. length==0 으로 처리해야 예외에서 걸림
 			if (str.length == 0) {
-				str = "null";
+				document.getElementById("txtHint").innerHTML = "";
+				return;
 			}
 
 			var xhttp = new XMLHttpRequest();

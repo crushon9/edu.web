@@ -13,13 +13,12 @@
 	JSON, XML, HTML 그리고 일반 텍스트 형식 등을 포함한 다양한 포맷을 주고 받을 수 있습니다.
 	AJAX의 강력한 특징은 페이지 전체를 리프레쉬 하지 않고서도 수행 되는 "비동기성"입니다.
 	이러한 비동기성을 통해 사용자의 Event가 있으면 전체 페이지가 아닌 일부분만을 업데이트 할 수 있게 해줍니다.
+	(ajax는 데이터를 전송하고, 수신 후 처리시 javaScript로 처리)
 	
 	- Ajax를 사용하는 이유
 	1) 웹 페이지가 로드된 후 서버에서 데이터를 불러오기 위해
 	2) 새로고침 없이 페이지를 업데이트
 	3) 백그라운드에서 웹 서버에 데이터 전송
-	
-	- 데이터를 전송하고, 수신 후 처리할 때도 javaScript로 처리
 	
 	// 일반적인 경우
 	A 클라이언트JSP -> B 서버Servlet -> C 클라이언트JSP
@@ -29,30 +28,29 @@
 
  -->
 
+	<h2>XMLHttpRequest Object</h2>
 	<div id="output">
-		<h2>XMLHttpRequest Object</h2>
 		<button type="button" onclick="loadDoc()">내용변경</button>
 	</div>
 	<script type="text/javascript">
 		function loadDoc() {
 			var xhttp = new XMLHttpRequest(); // 브라우저 내장 request 객체
 			// onreadystatechange : readyState 속성이 변경될 때 호출할 함수를 정의
+			// readyState : XMLHttpRequest의 상태
+			// 0: request not initialized
+			// 1: server connection established
+			// 2: request received
+			// 3: processiong request
+			// 4: request finished and response is ready
 			xhttp.onreadystatechange = function() {
-				// readyState : XMLHttpRequest의 상태
-				// 0: request not initialized
-				// 1: server connection established
-				// 2: request received
-				// 3: processiong request
-				// 4: request finished and response is ready
-
-				// status : HTML 메시지 코드
-				// 200: “OK”
-				// 403: “Forbidden”
-				// 404: “Page not founde”
 				if (this.readyState == 4 && this.status == 200) {
+					// status : HTML 메시지 코드
+					// 200: “OK”
+					// 403: “Forbidden”
+					// 404: “Page not founde”
 					console.log(this);
 					document.getElementById("output").innerHTML = this.responseText;
-					// this.responseText : 응답 데이터를 문자열로 변환
+					// this.responseText : 응답 데이터를 문자열로 변환 (이때 가져온 파일의 HTML태그까지 통채로 output으로 출력)
 				}
 			};
 
@@ -61,11 +59,12 @@
 			// method : 요청타입 GET or POST
 			// url : 파일 또는 요청 서버 위치
 			// async : true(비동기) or false(동기)
-			xhttp.send(); // 보냄
+			xhttp.send();
 			// send() GET 방식으로 요청을 서버로 전송
-			// send(string) POST 방식으로 요청을 서버로 전송 string: 요청 파리미터 이름과 값
+			// send(string: 요청 파리미터 이름과 값) POST 방식으로 요청을 서버로 전송
 		}
-		// 엥?? xhttp.open 랑 xhttp.send(); 실행되고 xhttp.onreadystatechange 실행된다는데?
+		// 순서
+		// xhttp.open 랑 xhttp.send(); 실행되고, readyState의 속성이 변경되면 xhttp.onreadystatechange 실행됨
 		// 한번 수행하면 연결끊어짐 stateless 즉 Request 초기화
 	</script>
 </body>

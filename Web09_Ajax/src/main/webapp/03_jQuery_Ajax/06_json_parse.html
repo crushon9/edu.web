@@ -7,7 +7,6 @@
 </head>
 <body>
 	<p id="output"></p>
-
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.ajax({
@@ -17,11 +16,12 @@
 					console.log(result);
 					var obj = JSON.parse(result); // JSON을 javaScript 객체로 변환
 					var output = $('#output');
-					output.html('이름 : ' + obj.name	+ '<br>나이 : ' + obj.age);
-					for (var i = 0; i < obj.pets.length; i++) {
-						output.append('<br>펫 : ' + obj.pets[i].animal
-							+ ', 이름 : ' + obj.pets[i].name);
-					}
+					var str = "";
+					str += '이름 : ' + obj.name	+ '<br>나이 : ' + obj.age;
+					for (var i in obj.pets) {
+						str += '<br>펫 : ' + obj.pets[i].animal + ' , 이름 : ' + obj.pets[i].name;
+					};
+					output.html(str); // 완성된 문자열str을 한번에 html로 출력!
 				}
 			}); // end ajax
 		}); // end document

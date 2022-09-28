@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<title>로그인 페이지</title>
+</head>
+<body>
+	<h1>로그인 페이지</h1>
+	<div>
+		아이디 : <input type="text" id="userid"><br>
+		비밀번호 : <input	type="password" id="password"><br>
+		<button id="loginBtn">로그인</button>
+	</div>
+	<div id="output"></div>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#loginBtn').click(function() {
+				// click()안에 넣어야 버튼을 누른 시점에서 데이터를 가지고 옴
+				var userid = $('#userid').val(); 
+				var password = $('#password').val();
+				console.log("userid : " + userid);
+				console.log("password : " + password);
+				
+				var obj = {
+					'userid' : userid,
+					'password' : password
+				};
+				
+				// ajax 요청 전송
+				$.ajax({
+					type : 'post',
+					url : '../login.do',
+					data : {'obj' : JSON.stringify(obj)}, // jacaScript객체를 JSON데이터로 변환하여 obj파라미터에 담아 보냄
+					success : function(result) {
+						
+					}
+				}); // end ajax()
+			}) // end loginBtn.click()
+		}); // end document.ready()
+	</script>
+</body>
+</html>

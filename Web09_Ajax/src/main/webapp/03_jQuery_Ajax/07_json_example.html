@@ -34,7 +34,9 @@
 					url : '../login.do',
 					data : {'obj' : JSON.stringify(obj)}, // jacaScript객체를 JSON데이터로 변환하여 obj파라미터에 담아 보냄
 					success : function(result) {
-						
+						if(result == '로그인성공'){
+							alert(result);
+						}
 					}
 				}); // end ajax()
 			}) // end loginBtn.click()

@@ -1,11 +1,17 @@
 package edu.web.ajax;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 //	 [클라이언트JSP] ================> [서버Servlet]
 //	JavaScript 데이터					JSON 데이터(String)
 //	  ↓ parse ↓					      ↓ parse ↓
@@ -29,12 +35,29 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String obj = request.getParameter("obj"); // JSON데이터의 타입은 String
+		System.out.println("파싱전 obj : " + obj);
+
 		// * json 라이브러리 다운로드
 		// https://code.google.com/archive/p/json-simple/downloads
-		
-		String obj = request.getParameter("obj"); // JSON데이터의 타입은 String
-		System.out.println(obj);
-		
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject jsonObj = (JSONObject) parser.parse(obj);
+			System.out.println("파싱후 jsonObj : " + jsonObj);
+
+			String userid = (String) jsonObj.get("userid");
+			String password = (String) jsonObj.get("password");
+			System.out.println(userid);
+			System.out.println(password);
+
+			if (userid.equals("test") && password.equals("1234")) {
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter out = response.getWriter();
+				out.append("로그인성공"); // success : function의 result로 들어감
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

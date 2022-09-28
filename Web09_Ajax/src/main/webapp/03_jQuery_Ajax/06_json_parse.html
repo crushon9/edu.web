@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<title>jQuery Ajax JSON</title>
+</head>
+<body>
+	<p id="output"></p>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				type : "get",
+				url : "06_json_test.txt",
+				success : function(result) {
+					console.log(result);
+					var obj = JSON.parse(result); // JSON을 javaScript 객체로 변환
+					var output = $('#output');
+					output.html('이름 : ' + obj.name	+ '<br>나이 : ' + obj.age);
+					for (var i = 0; i < obj.pets.length; i++) {
+						output.append('<br>펫 : ' + obj.pets[i].animal
+							+ ', 이름 : ' + obj.pets[i].name);
+					}
+				}
+			}); // end ajax
+		}); // end document
+	</script>
+</body>
+</html>

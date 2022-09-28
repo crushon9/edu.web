@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<title>Get Method</title>
+</head>
+<body>
+	<!-- GET 서버로부터 정보를 조회하기 위해 설계된 메소드 GET은 요청을 전송할 때 필요한 데이터를 Body에 담지 않고, 쿼리스트링을 통해 전송합니다. 
+	URL의 끝에 ?와 함께 이름과 값으로 쌍을 이루는 요청 파라미터를 쿼리스트링이라고 부릅니다. 
+	만약, 요청 파라미터가 여러 개이면 &로 연결합니다.
+	POST는 리소스를 생성/변경하기 위해 설계되었기 때문에 GET과 달리 전송해야될 데이터를 HTTP 메세지의 Body에 담아서 전송합니다. -->
+
+	<!-- GET (Idempotent) : 서버에게 동일한 요청을 여러 번 전송하더라도 동일한 응답이 돌아옴. 주로 조회를 할 때에 사용
+	POST (Non-idempotent) : 서버에게 동일한 요청을 여러 번 전송해도 응답은 항상 다를 수 있습니다. 주로 서버의 상태나 데이터를 변경시킬 때 사용됩니다.
+	게시글을 쓰면 서버에 게시글이 저장이 되고, 게시글을 삭제하면 해당 데이터가 없어지는 등 POST로 요청을 하게 되면 서버의 무언가는 변경되도록 사용됩니다.
+	이처럼 POST는 생성, 수정, 삭제에 사용할 수 있지만, 생성에는 POST, 수정은 PUT 또는 PATCH, 삭제는 DELETE가 더 용도에 맞는 메소드라고 할 수 있습니다. -->
+	
+	<button>HTTP Get Request를 페이지에 보내고, 그 결과를 가져오는 버튼</button>
+	<script type="text/javascript">
+		// $.get(url, callback);
+		$(document).ready(function() {
+			$('button').click(function() {
+				// get은 그냥 가지고 오는 기능, 파라미터를 넣지 않아도됨
+				// 가지고온 내용은 function의 data로 들어옴
+				$.get("04_get_test.jsp", function(data, status) {
+					alert("Data : " + data + "\n status : " + status);
+					document.write(data);
+				}); // end get
+			}); // end button.click
+		}); // end document
+	</script>
+</body>
+</html>

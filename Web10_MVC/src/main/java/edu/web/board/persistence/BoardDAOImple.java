@@ -121,7 +121,7 @@ public class BoardDAOImple implements BoardDAO, BoardQuery {
 			pstmt = conn.prepareStatement(SQL_UPDATE);
 			pstmt.setString(1, vo.getBoardTitle());
 			pstmt.setString(2, vo.getBoardContent());
-			pstmt.setString(3, vo.getMemberId());
+			pstmt.setInt(3, vo.getBoardId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

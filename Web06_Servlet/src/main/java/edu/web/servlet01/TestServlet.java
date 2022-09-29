@@ -29,7 +29,6 @@ public class TestServlet extends HttpServlet {
 	private static final String CLASSNAME = TestServlet.class.getName();
 
 	public TestServlet() {
-		super();
 		System.out.println(CLASSNAME + " : TestServlet 생성자 호출");
 		// 한번 생성자로 생성한 뒤에는 인스턴스 재활용 함
 	}

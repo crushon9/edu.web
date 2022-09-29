@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<context>
+	<!-- DBCP를 사용하기 위한 Java Bean 설정 -->
+	<Resource 
+		auth="Container"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracleLthin:@localhost:1521:xe"
+		username="scott"
+		password="tiger"
+		name="dbcp/orcl"
+		type="javax.sql.DataSource"
+		maxTotal="50"
+		maxWaitMillis="1000"
+	/>
+</context>
+
+<!-- 
+여기서 설정하는건 java로 읽혀서 객체가 생성됨, 즉 JVM이 컴파일함
+auth="Container" 
+driverClassName="oracle.jdbc.driver.OracleDriver"
+url="jdbc:oracleLthin:@localhost:1521:xe" 연결 DB 경로
+username="scott" DB 사용자 이름
+password="tiger" DB 사용자 비밀번호
+name="dbcp/orcl" JNDI에서 찾아올 이름
+type="javax.sql.DataSource" 
+maxTotal="50" 동시에 접속할 수 있는 최대 연결 개수
+maxWaitMillis="1000" 접속 지연시 기다릴 시간 (millisecond)
+
+ -->

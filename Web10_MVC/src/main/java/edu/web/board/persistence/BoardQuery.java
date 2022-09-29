@@ -10,6 +10,7 @@ public interface BoardQuery {
 	public static final String COL_BOARD_DATE_CREATED = "BOARD_DATE_CREATED";
 
 	// 새 글 작성
+	
 	public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME + " (" + COL_BOARD_ID + ", " + COL_BOARD_TITLE
 			+ ", " + COL_BOARD_CONTENT + ", " + COL_MEMBER_ID + ") VALUES (SEQ_BOARD.nextval, ?, ?, ?)";
 

@@ -71,6 +71,7 @@
 	%>
 
 	<h2>VO 출력</h2>
+	<!-- 따로 request에서 꺼내지 않아도 바로 꺼내짐..${ } 가 곧 자바세상.. -->
 	<c:forEach var="vo" items="${list}">
 		<p>이름 : ${vo.name }</p>
 		<p>연락처 : ${vo.phone }</p>

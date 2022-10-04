@@ -17,4 +17,16 @@
 	<res-type>javax.sql.DataSource</res-type>
 	<res-auth>Container</res-auth>
   </resource-ref>
+  
+  <!-- 필터 설정 -->
+  <filter>
+	<filter-name>CharFilter</filter-name>
+	<!-- filter-mapping 의 filter-name과 일치-->
+	<filter-class>edu.web.board.util.CharFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CharFilter</filter-name>
+  	<url-pattern>/*</url-pattern> <!-- 존재하는 모든 하위 경로 -->
+  </filter-mapping>
 </web-app>

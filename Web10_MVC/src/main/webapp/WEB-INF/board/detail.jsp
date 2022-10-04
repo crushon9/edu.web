@@ -24,6 +24,9 @@
 	</div>
 	<a href="index.jsp"><input type="button" value="글 목록"></a>
 	<a href="update.do?boardId=${vo.boardId }"><input type="button" value="글 수정"></a>
-	<a href="delete.do?boardId=${vo.boardId }"><input type="button" value="글 삭제"></a>
+	<form action="delete.do" method="post">
+		<input type="hidden" name="boardId" value="${vo.boardId }">
+		<input type="submit" value="글 삭제">
+	</form>
 </body>
 </html>

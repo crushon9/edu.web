@@ -48,13 +48,12 @@ public class BoardController extends HttpServlet {
 			throws ServletException, IOException {
 		String requestURI = request.getRequestURI();
 		String requestMethod = request.getMethod();
-		System.out.println("호출경로 : " + requestURI);
-		System.out.println("호출방식 : " + requestMethod);
+		System.out.println("호출경로 : " + requestURI + " 호출방식 : " + requestMethod);
 
 		// list.do
 		if (requestURI.contains(LIST + SERVER_EXTENSION)) {
 			System.out.println("list 호출확인");
-			list(request, response);
+			listGET(request, response);
 
 			// register.do
 		} else if (requestURI.contains(REGISTER + SERVER_EXTENSION)) {
@@ -68,7 +67,7 @@ public class BoardController extends HttpServlet {
 			// detail.do
 		} else if (requestURI.contains(DETAIL + SERVER_EXTENSION)) {
 			System.out.println("detail 호출확인");
-			detail(request, response);
+			detailGET(request, response);
 			// update.do
 		} else if (requestURI.contains(UPDATE + SERVER_EXTENSION)) {
 			if (requestMethod.equals("GET")) { // GET방식 (페이지불러오기)
@@ -81,12 +80,13 @@ public class BoardController extends HttpServlet {
 			// delete.do
 		} else if (requestURI.contains(DELETE + SERVER_EXTENSION)) {
 			System.out.println("delete 호출확인");
-			delete(request, response);
+			deletePOST(request, response);
 		}
 	} // end controlURI
 
 	// 전체 게시판 내용을 DB에서 가져오고, 그 데이터를 list.jsp 페이지에 보내기
-	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void listGET(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<BoardVO> list = dao.select();
 		request.setAttribute("list", list);
 		String path = BOARD_URL + LIST + EXTENSION; // WEB-INF/board/list.jsp
@@ -121,13 +121,22 @@ public class BoardController extends HttpServlet {
 	} // end registerPOST
 
 	// detail.jsp에서 boardId를 보내고 DB에서 해당게시글을 detail.jsp에 전송
-	private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void detailGET(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		BoardVO vo = dao.select(boardId);
-		request.setAttribute("vo", vo);
-		String path = BOARD_URL + DETAIL + EXTENSION; // WEB-INF/board/detail.jsp
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		System.out.println(vo);
+		if (vo != null) {
+			request.setAttribute("vo", vo);
+			String path = BOARD_URL + DETAIL + EXTENSION; // WEB-INF/board/detail.jsp
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+		} else {
+			PrintWriter out = response.getWriter();
+			out.print("<head><meta charset='UTF-8'></head>");
+			out.print("<script>alert('존재하지않는 게시글 입니다')</script>");
+			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
+		}
 	} // end detail
 
 	// detail.jsp에서 boardId를 보내고 DB에서 해당게시글을 update.jsp로 forward 호출
@@ -135,13 +144,22 @@ public class BoardController extends HttpServlet {
 			throws ServletException, IOException {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		BoardVO vo = dao.select(boardId);
-		request.setAttribute("vo", vo);
-		String path = BOARD_URL + UPDATE + EXTENSION; // WEB-INF/board/update.jsp
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		System.out.println(vo);
+		if (vo != null) {
+			// TODO : session 검사해서 있을때 여기로 보내야할것같은디
+			request.setAttribute("vo", vo);
+			String path = BOARD_URL + UPDATE + EXTENSION; // WEB-INF/board/update.jsp
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+		} else {
+			PrintWriter out = response.getWriter();
+			out.print("<head><meta charset='UTF-8'></head>");
+			out.print("<script>alert('존재하지않는 게시글 입니다')</script>");
+			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
+		}
 	} // end updateGET
 
-	// update.jsp에서 POST 방식으로 DB 내용 update하고 alert후 index.jsp
+	// update.jsp에서 POST 방식으로 DB 내용 update하고 alert후 detail.jsp
 	private void updatePOST(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
@@ -154,12 +172,14 @@ public class BoardController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print("<head><meta charset='UTF-8'></head>");
 			out.print("<script>alert('게시글 수정 성공')</script>");
-			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
+			// detail.do?boardId=게시글번호
+			out.print("<script>location.href='" + DETAIL + SERVER_EXTENSION + "?boardId=" + boardId + "';</script>");
 		}
 	} // end updatePOST
 
 	// detail.jsp에서 boardId를 보내고 DB에서 해당게시글을 delete하고 alert후 index.jsp
-	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void deletePOST(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int result = dao.delete(boardId);
 		System.out.println("delete 결과 : " + result);

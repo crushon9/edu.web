@@ -7,7 +7,6 @@
 
 <style type="text/css">
 table, th, td {
-
 	border-style: solid;
 	border-width: 1px;
 	text-align: center;
@@ -43,7 +42,7 @@ li {
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.boardId}</td>
-					<td>${vo.boardTitle}</td>
+					<td><a href="detail.do?boardId=${vo.boardId}">${vo.boardTitle}</a></td>
 					<td>${vo.memberId}</td>
 					<td>${vo.boardDateCreated}</td>
 				</tr>

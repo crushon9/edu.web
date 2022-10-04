@@ -51,7 +51,6 @@ public class BoardDAOImple implements BoardDAO, BoardQuery {
 		ResultSet rs = null;
 		conn = ConnMgr.getConnection();
 		try {
-			System.out.println("1");
 			pstmt = conn.prepareStatement(SQL_SELECT_ALL);
 			rs = pstmt.executeQuery();
 

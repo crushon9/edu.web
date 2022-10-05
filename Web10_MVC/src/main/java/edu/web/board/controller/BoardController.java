@@ -13,6 +13,7 @@ import edu.web.board.domain.BoardVO;
 import edu.web.board.persistence.BoardDAO;
 import edu.web.board.persistence.BoardDAOImple;
 import edu.web.board.util.PageCriteria;
+import edu.web.board.util.PageMaker;
 
 @WebServlet("*.do") // *.do로 선언된 HTTP 호출에 대해 모두 반응
 public class BoardController extends HttpServlet {
@@ -88,15 +89,41 @@ public class BoardController extends HttpServlet {
 	// 전체 게시판 내용을 DB에서 가져오고, 그 데이터를 list.jsp 페이지에 보내기
 	private void listGET(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int page = Integer.parseInt(request.getParameter("page"));
+		// 초기구동시 page가 null이면 parseInt시 예외발생하기 때문에 String으로 받아서
 		PageCriteria criteria = new PageCriteria();
-		criteria.setPage(page);
+		String page = request.getParameter("page");
+		if (page != null) { // null이 아닐때만 페이지값을 세팅
+			criteria.setPage(Integer.parseInt(page));
+		}
+		String numsPerPage = request.getParameter("numsPerPage");
+		if (numsPerPage != null) { // null이 아닐때만 페이지값을 세팅
+			criteria.setNumsPerPage(Integer.parseInt(numsPerPage));
+		}
+
 		List<BoardVO> list = dao.select(criteria);
-		
-		request.setAttribute("list", list);
-		String path = BOARD_URL + LIST + EXTENSION; // WEB-INF/board/list.jsp
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		if (!list.isEmpty()) { // list가 없을때 예외처리
+			request.setAttribute("list", list);
+			String path = BOARD_URL + LIST + EXTENSION; // WEB-INF/board/list.jsp
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			// 페이지 링크 번호에 대한 정보를 구성하여 list.jsp 페이지에 전송
+			PageMaker pageMaker = new PageMaker(criteria, dao.getTotalCounts());
+			System.out.println("현재페이지" + criteria.getPage());
+			System.out.println("한페이지당게시글수" + criteria.getNumsPerPage());
+			System.out.println("전체게시글수" + dao.getTotalCounts());
+			System.out.println("전체페이지수" + pageMaker.getRealEndPageNo());
+			System.out.println("한페이지당페이지링크개수" + pageMaker.getRealEndPageNo());
+			System.out.println("시작페이지링크번호" + pageMaker.getStartPageNo());
+			System.out.println("끝페이지링크번호" + pageMaker.getEndPageNo());
+			System.out.println("이전버튼" + pageMaker.isHasPrev());
+			System.out.println("다음버큰" + pageMaker.isHasNext());
+			request.setAttribute("pageMaker", pageMaker);
+			dispatcher.forward(request, response);
+		} else {
+			PrintWriter out = response.getWriter();
+			out.print("<head><meta charset='UTF-8'></head>");
+			out.print("<script>alert('존재하지 않는 페이지 입니다')</script>");
+			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
+		}
 	} // end list
 
 	// register.jsp를 forward 호출
@@ -139,7 +166,7 @@ public class BoardController extends HttpServlet {
 		} else {
 			PrintWriter out = response.getWriter();
 			out.print("<head><meta charset='UTF-8'></head>");
-			out.print("<script>alert('존재하지않는 게시글 입니다')</script>");
+			out.print("<script>alert('존재하지 않는 게시글 입니다')</script>");
 			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
 		}
 	} // end detail
@@ -159,7 +186,7 @@ public class BoardController extends HttpServlet {
 		} else {
 			PrintWriter out = response.getWriter();
 			out.print("<head><meta charset='UTF-8'></head>");
-			out.print("<script>alert('존재하지않는 게시글 입니다')</script>");
+			out.print("<script>alert('존재하지 않는 게시글 입니다')</script>");
 			out.print("<script>location.href='" + MAIN + EXTENSION + "';</script>");
 		}
 	} // end updateGET

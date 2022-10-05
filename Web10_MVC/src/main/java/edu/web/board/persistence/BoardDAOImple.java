@@ -189,8 +189,22 @@ public class BoardDAOImple implements BoardDAO, BoardQuery {
 
 	@Override
 	public int getTotalCounts() {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		conn = ConnMgr.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL_TOTAL_CNT);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnMgr.close(conn, pstmt, rs);
+		}
+		return count;
 	}
-
 }

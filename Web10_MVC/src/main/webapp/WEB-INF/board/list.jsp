@@ -49,5 +49,29 @@ li {
 			</c:forEach>
 		</tbody>
 	</table>
+
+	<ul>
+		<c:if test="${pageMaker.hasPrev}">
+			<li><a href="list.do?page=1&numsPerPage=${pageMaker.criteria.numsPerPage}">맨앞</a></li>
+			<li><a href="list.do?page=${pageMaker.startPageNo - 1}&numsPerPage=${pageMaker.criteria.numsPerPage}">이전</a></li>
+		</c:if>
+		<c:forEach var="i" begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" step="1">
+			<li><a href="list.do?page=${i}&numsPerPage=${pageMaker.criteria.numsPerPage}">${i}</a></li>
+		</c:forEach>
+		<c:if test="${pageMaker.hasNext}">
+			<li><a href="list.do?page=${pageMaker.endPageNo + 1}&numsPerPage=${pageMaker.criteria.numsPerPage}">다음</a></li>
+			<li><a href="list.do?page=${pageMaker.getRealEndPageNo()}&numsPerPage=${pageMaker.criteria.numsPerPage}">맨뒤</a></li>
+		</c:if>
+	</ul>
+	
+	<form action="list.do?page=${pageMaker.criteria.page}&numsPerPage=${pageMaker.criteria.numsPerPage}" method="get">
+	<select name="numsPerPage">
+			<option>3</option>
+			<option>5</option>
+			<option>10</option>
+	</select>
+	<input type="submit" value="적용">
+	</form>
+
 </body>
 </html>

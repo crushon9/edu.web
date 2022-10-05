@@ -39,4 +39,6 @@ public interface BoardQuery {
 			+ " DESC)A )B WHERE RN BETWEEN ? AND ?";
 
 	// 전체 게시글 수 선택
+	public static final String SQL_TOTAL_CNT = "SELECT COUNT(*) FROM " + TABLE_NAME;
+
 }

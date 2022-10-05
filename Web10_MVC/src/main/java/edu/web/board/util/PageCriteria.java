@@ -10,7 +10,7 @@ public class PageCriteria {
 	public PageCriteria() {
 		// 생성자 생성시 기본값
 		this.page = 1;
-		this.numsPerPage = 5;
+		this.numsPerPage = 3;
 	}
 
 	public PageCriteria(int page, int numsPerPage) {

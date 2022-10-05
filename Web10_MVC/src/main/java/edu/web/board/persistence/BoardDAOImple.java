@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import edu.web.board.domain.BoardVO;
+import edu.web.board.util.PageCriteria;
 import edu.web.dbcp.connmgr.ConnMgr;
 
 public class BoardDAOImple implements BoardDAO, BoardQuery {
@@ -147,6 +148,49 @@ public class BoardDAOImple implements BoardDAO, BoardQuery {
 			ConnMgr.close(conn, pstmt);
 		}
 		return result;
+	}
+
+	@Override
+	public List<BoardVO> select(PageCriteria criteria) {
+		List<BoardVO> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		conn = ConnMgr.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL_SELECT_PAGESCOPE);
+			pstmt.setInt(1, criteria.getStart());
+			pstmt.setInt(2, criteria.getEnd());
+			rs = pstmt.executeQuery();
+
+			int boardId;
+			String boardTitle;
+			String boardContent;
+			String memberId;
+			Date boardDateCreated;
+			BoardVO vo;
+
+			while (rs.next()) {
+				boardId = rs.getInt(COL_BOARD_ID);
+				boardTitle = rs.getString(COL_BOARD_TITLE);
+				boardContent = rs.getString(COL_BOARD_CONTENT);
+				memberId = rs.getString(COL_MEMBER_ID);
+				boardDateCreated = rs.getTimestamp(COL_BOARD_DATE_CREATED);
+				vo = new BoardVO(boardId, boardTitle, boardContent, memberId, boardDateCreated);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnMgr.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
+	@Override
+	public int getTotalCounts() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.web.board.domain.BoardVO;
 import edu.web.board.persistence.BoardDAO;
 import edu.web.board.persistence.BoardDAOImple;
+import edu.web.board.util.PageCriteria;
 
 @WebServlet("*.do") // *.do로 선언된 HTTP 호출에 대해 모두 반응
 public class BoardController extends HttpServlet {
@@ -87,7 +88,11 @@ public class BoardController extends HttpServlet {
 	// 전체 게시판 내용을 DB에서 가져오고, 그 데이터를 list.jsp 페이지에 보내기
 	private void listGET(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<BoardVO> list = dao.select();
+		int page = Integer.parseInt(request.getParameter("page"));
+		PageCriteria criteria = new PageCriteria();
+		criteria.setPage(page);
+		List<BoardVO> list = dao.select(criteria);
+		
 		request.setAttribute("list", list);
 		String path = BOARD_URL + LIST + EXTENSION; // WEB-INF/board/list.jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);

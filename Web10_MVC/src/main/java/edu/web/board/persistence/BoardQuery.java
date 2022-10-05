@@ -27,7 +27,16 @@ public interface BoardQuery {
 	// 특정 게시글 삭제
 	public static final String SQL_DELETE = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_BOARD_ID + " = ?";
 
-	// TODO 게시글 페이징 처리하여 선택
+	// 게시글 페이징 처리 선택
+	/*
+	 * SELECT B.BOARD_ID, B.BOARD_TITLE, B.BOARD_CONTENT, B.MEMBER_ID,
+	 * B.BOARD_DATE_CREATED FROM ( SELECT ROWNUM RN, A.* FROM ( SELECT * FROM board
+	 * * ORDER BY board_id DESC )A )B WHERE RN BETWEEN ? AND ?
+	 */
+	public static final String SQL_SELECT_PAGESCOPE = "SELECT B." + COL_BOARD_ID + ", B." + COL_BOARD_TITLE + ", B."
+			+ COL_BOARD_CONTENT + ", B." + COL_MEMBER_ID + ", B." + COL_BOARD_DATE_CREATED
+			+ " FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL_BOARD_ID
+			+ " DESC)A )B WHERE RN BETWEEN ? AND ?";
 
 	// 전체 게시글 수 선택
 }

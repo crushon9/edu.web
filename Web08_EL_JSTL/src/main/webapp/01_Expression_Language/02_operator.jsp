@@ -30,13 +30,13 @@
 	<h2>산술 연산자</h2>
 	더하기 : ${20 + 10}
 	<br> 빼기 : ${"20" - "10"}
-	<br> 몫 : ${"40" div "6" }
+	<%-- 	<br> 몫 : ${"40" div "6" } --%>
 	<br> 나머지 : ${40 mod 6 }
 	<br>
 
 	<h2>비교 연산자</h2>
 	같은가? : ${"10" eq "10" }
-	<br> 다른가? : ${"10" ne "10" }
+	<%-- 	<br> 다른가? : ${"10" ne "10" } --%>
 	<br> 작은가? : ${"10" lt "10" }
 	<br> 큰가? : ${"10" gt "10" }
 	<br> 작거나 같은가? : ${"10" le "10" }
@@ -54,7 +54,6 @@
 	<br> 빈 문자열 : ${empty emptyStr }
 	<br> 길이가 0인 배열 : ${empty zeroArray }
 	<br> 빈 ArrayList(collection) : ${empty emptyList }
-	<br> 나머지 경우 : ${empty "문자열" }
-	<br> not null : ${not empty nullStr }
+	<br> 나머지 경우 : ${not empty "문자열" }
 </body>
 </html>

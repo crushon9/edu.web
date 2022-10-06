@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <title>${vo.boardTitle}</title>
 </head>
 <body>
@@ -28,5 +29,37 @@
 		<input type="hidden" name="boardId" value="${vo.boardId }">
 		<input type="submit" value="글 삭제">
 	</form>
+	<hr>
+	<div style="text-align: center;">
+		<input type="hidden" id="boardId" value="${vo.boardId }">
+		<input type="text" id="memberId">
+		<input type="text" id="replyContent">
+		<button id="btn_add">작성</button>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#btn_add').click(function() {
+				var boardId = $('#boardId').val(); // 게시글번호 데이터
+				var memberId = $('#memberId').val(); // 사용자아이디 데이터
+				var replyContent = $('#replyContent').val(); // 댓글내용 데이터
+				var obj = {
+					'boardId' : boardId,
+					'memberId' : memberId,
+					'replyContent' : replyContent
+				};
+				console.log(obj);
+				
+				// $.ajax로 송수신
+				$.ajax({
+					type : "POST",
+					url : "replies/add",
+					data : {'obj' : JSON.stringify(obj)}, // JSON으로 변환
+					success : function(result) {}
+					
+				}); // end ajax()
+			}); // end btn_add.click
+		});
+	</script>
 </body>
 </html>

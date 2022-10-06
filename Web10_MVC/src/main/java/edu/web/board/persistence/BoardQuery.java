@@ -2,7 +2,7 @@ package edu.web.board.persistence;
 
 public interface BoardQuery {
 
-	public static final String TABLE_NAME = "BOARD";
+	public static final String TABLE_NAME = "MVC_BOARD";
 	public static final String COL_BOARD_ID = "BOARD_ID";
 	public static final String COL_BOARD_TITLE = "BOARD_TITLE";
 	public static final String COL_BOARD_CONTENT = "BOARD_CONTENT";

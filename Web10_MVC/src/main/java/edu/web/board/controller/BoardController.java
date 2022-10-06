@@ -54,7 +54,7 @@ public class BoardController extends HttpServlet {
 
 		// list.do
 		if (requestURI.contains(LIST + SERVER_EXTENSION)) {
-			System.out.println("list 호출확인");
+			System.out.println("listGET 호출확인");
 			listGET(request, response);
 
 			// register.do
@@ -68,7 +68,7 @@ public class BoardController extends HttpServlet {
 			}
 			// detail.do
 		} else if (requestURI.contains(DETAIL + SERVER_EXTENSION)) {
-			System.out.println("detail 호출확인");
+			System.out.println("detailGET 호출확인");
 			detailGET(request, response);
 			// update.do
 		} else if (requestURI.contains(UPDATE + SERVER_EXTENSION)) {
@@ -81,7 +81,7 @@ public class BoardController extends HttpServlet {
 			}
 			// delete.do
 		} else if (requestURI.contains(DELETE + SERVER_EXTENSION)) {
-			System.out.println("delete 호출확인");
+			System.out.println("deletePOST 호출확인");
 			deletePOST(request, response);
 		}
 	} // end controlURI
@@ -107,15 +107,15 @@ public class BoardController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			// 페이지 링크 번호에 대한 정보를 구성하여 list.jsp 페이지에 전송
 			PageMaker pageMaker = new PageMaker(criteria, dao.getTotalCounts());
-			System.out.println("현재페이지" + criteria.getPage());
-			System.out.println("한페이지당게시글수" + criteria.getNumsPerPage());
-			System.out.println("전체게시글수" + dao.getTotalCounts());
-			System.out.println("전체페이지수" + pageMaker.getRealEndPageNo());
-			System.out.println("한페이지당페이지링크개수" + pageMaker.getRealEndPageNo());
-			System.out.println("시작페이지링크번호" + pageMaker.getStartPageNo());
-			System.out.println("끝페이지링크번호" + pageMaker.getEndPageNo());
-			System.out.println("이전버튼" + pageMaker.isHasPrev());
-			System.out.println("다음버큰" + pageMaker.isHasNext());
+			System.out.println("현재페이지 " + criteria.getPage());
+			System.out.println("한페이지당게시글수 " + criteria.getNumsPerPage());
+			System.out.println("전체게시글수 " + dao.getTotalCounts());
+			System.out.println("전체페이지수 " + pageMaker.getRealEndPageNo());
+			System.out.println("한페이지당페이지링크개수 " + pageMaker.getLinksPerPage());
+			System.out.println("시작페이지링크번호 " + pageMaker.getStartPageNo());
+			System.out.println("끝페이지링크번호 " + pageMaker.getEndPageNo());
+			System.out.println("이전버튼 " + pageMaker.isHasPrev());
+			System.out.println("다음버큰 " + pageMaker.isHasNext());
 			request.setAttribute("pageMaker", pageMaker);
 			dispatcher.forward(request, response);
 		} else {

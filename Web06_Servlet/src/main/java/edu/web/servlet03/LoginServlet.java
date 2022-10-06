@@ -18,6 +18,7 @@ public class LoginServlet extends HttpServlet {
 	public LoginServlet() {
 	}
 
+	// get, post 방식 모두 스트링형태로 파라미터 전달됨
 	// doGet() : form method = "GET" 방식으로 전송할 경우 doGet()으로 수신
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

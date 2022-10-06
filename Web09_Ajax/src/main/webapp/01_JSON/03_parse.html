@@ -13,15 +13,15 @@
 		// 주로 ajax로 데이터를 통신할 경우 사용
 		/*
 		
-		  [클라이언트JSP] ================> [서버Servlet]
-		JavaScript 데이터					JSON 데이터(String)
-		  ↓ parse ↓					      ↓ parse ↓
-		JSON 데이터(String)				Java 데이터(다른언어가능)
+		  [클라이언트JSP] =====================> [서버Servlet]
+		JavaScript 데이터						JSON 데이터(String)
+		  ↓ parse ↓	JSON.stringify(obj);	 ↓ parse ↓ JSONObject jsonObj = (JSONObject) parser.parse(obj);
+		JSON 데이터(String)					Java 데이터(다른언어가능)
 		
-		  [서버Servlet] =================> [클라이언트JSP]
-		Java 데이터(다른언어가능)			JSON 데이터(String)
-		  ↓ parse ↓						  ↓ parse ↓
-		JSON 데이터(String)				JavaScript 데이터
+		  [서버Servlet] =====================> [클라이언트JSP]
+		Java 데이터(다른언어가능)				JSON 데이터(String)
+		  ↓ parse ↓ jsonObject.put(); 		  ↓ parse ↓ JSON.parse(txt);
+		JSON 데이터(String)					JavaScript 데이터
 		 
 		*/
 

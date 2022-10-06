@@ -30,12 +30,12 @@ public class SendToClientServlet extends HttpServlet {
 		// parameter는 String 형태로 값을 전송
 		// ************************(form 외의 위치에서 데이터 추가 불가능)*개중요
 		// parameter : client(form) -> sever (O)
-		//				sever -> client (X : 하지만 예외로 forward 방식은 받은 request를 값변경없이 그대로 client로 보냄)
+		//				sever -> client (X : 하지만 예외로 forward 방식으로 받은 request를 값변경없이 그대로 client로 보냄)
 		// parameter는 set함수 없이 get함수만 있음
 		// ** attribute
 		// attribute는 client / sever에서 생성하여 전송 가능
-		// attribute는 문자열 뿐만 아니라, 다양한 변수 타입 및 참조 타입 전송 가능
 		// attribute는 sever -> client (O)
+		// attribute는 문자열 뿐만 아니라, 다양한 변수 타입 및 참조 타입 전송 가능
 		// attribute는 get, set 함수 모두 있음
 
 		// setAttribute(key:string, value:object) 고로 value:object 형변환을 신경써야함

@@ -21,7 +21,7 @@ public class ForwardTestServlet extends HttpServlet {
 	}
 
 	// forward : URL 주소 유지. request/response 객체 유지 (그럼 그냥 페이지 이동하면 객체는 초기화 된단거네?)
-	// 근데 forward방식은 왜 URL이 바뀌지 않고 유지되는 걸까? 왜냐면 서버내부의 동작으로 응답을 하기때문에 클라이언트는 알지못함\
+	// 근데 forward방식은 왜 URL이 바뀌지 않고 유지되는 걸까? 왜냐면 서버내부의 동작으로 응답을 하기때문에 클라이언트는 알지못함
 	// 포워딩은 외부에 직접 정보가 공개되지 않아야 하는 경우 유용하다
 	// 반면 리다이렉트는 re-direct 서버가 클라이언트에서 다른 페이지에 다시 요청하라고 지시를 내리고(300번응답), 클라이언트는 다른페이지에 요청을 하여 응답(200번응답)받으며 URL이 변경됨
 	// 리다이렉트는 DB에 변경이 일어날때 클라이언트가 하나하나 요청하게 함으로서 중복을 막는 케이스에 유용하다
@@ -52,7 +52,6 @@ public class ForwardTestServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		// result.jsp에 request 객체를 전달하고
 		// 전달받은 request에서 parameter를 꺼내는 방식
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

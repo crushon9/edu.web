@@ -36,9 +36,17 @@
 		<input type="text" id="replyContent">
 		<button id="btn_add">작성</button>
 	</div>
+	<hr>
+	<div style="text-align: center;">
+		<div id="replies"></div>
+	</div>
+	<div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			// 버튼 클릭시 댓글 추가
 			$('#btn_add').click(function() {
 				var boardId = $('#boardId').val(); // 게시글번호 데이터
 				var memberId = $('#memberId').val(); // 사용자아이디 데이터
@@ -49,17 +57,31 @@
 					'replyContent' : replyContent
 				};
 				console.log(obj);
-				
+
 				// $.ajax로 송수신
 				$.ajax({
 					type : "POST",
 					url : "replies/add",
-					data : {'obj' : JSON.stringify(obj)}, // JSON으로 변환
-					success : function(result) {}
-					
-				}); // end ajax()
+					data : {
+						'obj' : JSON.stringify(obj)
+					}, // JSON으로 변환
+					success : function(result) {
+						console.log(result);
+						if (result == 'success') {
+							alert('댓글 입력 성공');
+						}
+					} // end ajax.success.function
+				}); // end ajax
 			}); // end btn_add.click
-		});
+
+			// 게시판 댓글 전체 가져오기
+			function getAllReplies() {
+				var boardId = $('#boardId').val();
+				var url = 'replies/all?boardId=' + boardId;
+				$.getJSON(); // end getJSON
+			} // end getAllReplies
+
+		}); // end document
 	</script>
 </body>
 </html>

@@ -46,16 +46,16 @@ public class ReplyController extends HttpServlet {
 		if (requestURI.contains("add")) {
 			System.out.println("replyAdd 호출확인");
 			replyAdd(request, response);
-			// replies/select
-		} else if (requestURI.contains("replySelect")) {
-			System.out.println("replySelect 호출확인");
-			replySelect(request, response);
+			// replies/all
+		} else if (requestURI.contains("all")) {
+			System.out.println("replyAll 호출확인");
+			replyAll(request, response);
 			// replies/update
-		} else if (requestURI.contains("replyUpdate")) {
+		} else if (requestURI.contains("update")) {
 			System.out.println("replyUpdate 호출확인");
 			replyUpdate(request, response);
 			// replies/delete
-		} else if (requestURI.contains("replyDelete")) {
+		} else if (requestURI.contains("delete")) {
 			System.out.println("replyDelete 호출확인");
 			replyDelete(request, response);
 		}
@@ -71,7 +71,7 @@ public class ReplyController extends HttpServlet {
 
 	}
 
-	private void replySelect(HttpServletRequest request, HttpServletResponse response)
+	private void replyAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 	}
@@ -82,18 +82,21 @@ public class ReplyController extends HttpServlet {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj;
 		try {
+			// JSON 파라미터를 JSONObject로 parse
 			jsonObj = (JSONObject) parser.parse(obj);
+			// jsonObj 에서 요소를 하나씩 꺼내어 vo에 저장
 			int boardId = Integer.parseInt((String) jsonObj.get("boardId"));
 			String memberId = (String) jsonObj.get("memberId");
 			String replyContent = (String) jsonObj.get("replyContent");
 			ReplyVO vo = new ReplyVO(0, boardId, memberId, replyContent, null);
 			System.out.println(vo);
-
+			// DB에 insert
 			int result = dao.insert(vo);
 			System.out.println("replyAdd 결과 : " + result);
 			if (result == 1) {
-				PrintWriter out = response.getWriter();
-				out.print("<head><meta charset='UTF-8'></head>");
+				response.getWriter().append("sucess");
+				// 성공시 append("sucess") 내용을 detail.jsp 의
+				// success : function(result)의 result로 보냄
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();

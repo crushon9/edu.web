@@ -11,7 +11,7 @@ public interface ReplyQuery {
 
 	// 새 댓글 작성
 	public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME
-			+ " VALUES (SEQ_BOARD.nextval, ?, ?, ?, SYSDATE)";
+			+ " VALUES (SEQ_REPLY.nextval, ?, ?, ?, SYSDATE)";
 
 	// 특정 게시글 전체 댓글 선택
 	public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_BOARD_ID + " = ? ORDER BY "

@@ -2,11 +2,16 @@ package edu.web.board.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -42,39 +47,20 @@ public class ReplyController extends HttpServlet {
 		String requestMethod = request.getMethod();
 		System.out.println("호출경로 : " + requestURI + " 호출방식 : " + requestMethod);
 
-		// replies/add
 		if (requestURI.contains("add")) {
-			System.out.println("replyAdd 호출확인");
+			System.out.println("replies/add 호출확인");
 			replyAdd(request, response);
-			// replies/all
 		} else if (requestURI.contains("all")) {
-			System.out.println("replyAll 호출확인");
-			replyAll(request, response);
-			// replies/update
+			System.out.println("replies/all 호출확인");
+			replyList(request, response);
 		} else if (requestURI.contains("update")) {
-			System.out.println("replyUpdate 호출확인");
+			System.out.println("replies/update 호출확인");
 			replyUpdate(request, response);
-			// replies/delete
 		} else if (requestURI.contains("delete")) {
-			System.out.println("replyDelete 호출확인");
+			System.out.println("replies/delete 호출확인");
 			replyDelete(request, response);
 		}
 	} // end controlURI
-
-	private void replyDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	private void replyUpdate(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	private void replyAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
 
 	private void replyAdd(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -94,12 +80,44 @@ public class ReplyController extends HttpServlet {
 			int result = dao.insert(vo);
 			System.out.println("replyAdd 결과 : " + result);
 			if (result == 1) {
-				response.getWriter().append("sucess");
+				response.getWriter().append("success");
 				// 성공시 append("sucess") 내용을 detail.jsp 의
 				// success : function(result)의 result로 보냄
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void replyList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// get방식 파라미터로 받은 boardId
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		// DB에서 댓글 목록을 리스트에 담음
+		List<ReplyVO> list = dao.select(boardId);
+		// JSONArray에 List를 풀어서 하나씩 담음
+		JSONArray jsonArr = new JSONArray();
+		for (int i = 0; i < list.size(); i++) {
+			JSONObject jsonObj = new JSONObject();
+			ReplyVO vo = list.get(i);
+			jsonObj.put("replyId", vo.getReplyId());
+			jsonObj.put("boardId", vo.getBoardId());
+			jsonObj.put("memberId", vo.getMemberId());
+			jsonObj.put("replyContent", vo.getReplyContent());
+			jsonObj.put("replyDateCreated", vo.getReplyDateCreated().toString()); // Date 타입 인식불가하여 toString 
+			jsonArr.add(jsonObj);
+		}
+		// response에 JSONArray을 담음
+		response.getWriter().append(jsonArr.toString());
+	}
+
+	private void replyUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	private void replyDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 }

@@ -30,14 +30,14 @@
 		<input type="submit" value="글 삭제">
 	</form>
 	<hr>
-	<div style="text-align: center;">
+	<div style="margin-left: 80px">
 		<input type="hidden" id="boardId" value="${vo.boardId }">
 		<input type="text" id="memberId">
 		<input type="text" id="replyContent">
 		<button id="btn_add">작성</button>
 	</div>
 	<hr>
-	<div style="text-align: center;">
+	<div style="margin-left: 40px">
 		<div id="replies"></div>
 	</div>
 	<div>
@@ -46,6 +46,9 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			// 처음에 댓글 전체 가져오기 호출
+			getAllReplies();
+
 			// 버튼 클릭시 댓글 추가
 			$('#btn_add').click(function() {
 				var boardId = $('#boardId').val(); // 게시글번호 데이터
@@ -68,18 +71,52 @@
 					success : function(result) {
 						console.log(result);
 						if (result == 'success') {
-							alert('댓글 입력 성공');
+							getAllReplies(); // 댓글가져오기
 						}
 					} // end ajax.success.function
 				}); // end ajax
 			}); // end btn_add.click
 
 			// 게시판 댓글 전체 가져오기
+
 			function getAllReplies() {
 				var boardId = $('#boardId').val();
 				var url = 'replies/all?boardId=' + boardId;
-				$.getJSON(); // end getJSON
+				$.getJSON( // 자동으로 JSON 데이터가 javaScript로 parsing됨
+					url,
+					function(data) {
+						// 서버에서 온 data가 저장되어있음
+						console.log(data);
+						// 댓글 데이터를 HTML에 표현할 문자열 변수
+						var replyList = '';
+					
+						// $(컬렉션).each() : 컬렉션 데이터를 반복문으로 꺼내는 함수
+						$(data).each(function() {
+							// this : 컬렉션의 한줄데이터를 의미
+							console.log(this);
+							// string 날짜를 다시 Date로 변환
+							var replyDateCreated = new Date(this.replyDateCreated);
+							// 댓글 한줄씩 반복문으로 생성
+							replyList += '<div class="reply_item">'
+								+ '<pre>'
+								+ '<input type="hidden" id="replayId" value="' + this.replayId + '"/>'
+								+ '<input type="hidden" id="memberId" value="' + this.memberId + '"/>'
+								+ this.memberId
+								+ '&nbsp;&nbsp;'
+								+ '<input type="text" id="replyContent" value="' + this.replyContent + '" readonly/>'
+								+ '&nbsp;&nbsp;'
+								+ replyDateCreated
+								+ '&nbsp;&nbsp;'
+								+ '<button id="btn_update">수정</button>'
+								+ '<button id="btn_delete">삭제</button>'
+								+ '</pre>'
+								+ '</div>';
+						});
+						$('#replies').html(replyList);
+					}
+				); // end getJSON
 			} // end getAllReplies
+			
 
 		}); // end document
 	</script>

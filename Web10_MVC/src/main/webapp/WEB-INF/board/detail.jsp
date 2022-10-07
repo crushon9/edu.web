@@ -1,5 +1,7 @@
+<%@page import="edu.web.board.domain.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +27,31 @@
 	</div>
 	<a href="index.jsp"><input type="button" value="글 목록"></a>
 	<a href="update.do?boardId=${vo.boardId }"><input type="button" value="글 수정"></a>
-	<form action="delete.do" method="post">
+	<form action="delete.do" method="post" style="display: inline;">
 		<input type="hidden" name="boardId" value="${vo.boardId }">
 		<input type="submit" value="글 삭제">
 	</form>
 	<hr>
-	<div style="margin-left: 80px">
-		<input type="hidden" id="boardId" value="${vo.boardId }">
-		<input type="text" id="memberId">
-		<input type="text" id="replyContent">
-		<button id="btn_add">작성</button>
-	</div>
+	
+	<!-- 댓글을 가져오기 위해 boardId 와 memberId를 hidden으로 둠 -->
+	<input type="hidden" id="boardId" value="${vo.boardId }">
+	<!-- memberId 세션이 없다면 -->
+	<c:if test="${empty sessionScope.memberId }">
+		*댓글은 로그인이 필요한 서비스 입니다
+		<a href="login.go?targetURL=detail.do?boardId=${vo.boardId }">로그인</a>
+	</c:if>
+	<!-- memberId 세션이 있다면 -->
+	<c:if test="${not empty sessionScope.memberId }">
+		<div style="text-align: center;">
+			${sessionScope.memberId }님, 댓글 작성 가능합니다	
+			<input type="hidden" id="memberId" value="${sessionScope.memberId }">
+			<input type="text" id="replyContent">
+			<button id="btn_add">작성</button>
+		</div>
+	</c:if>
+	
 	<hr>
+	<!-- 댓글을 출력할 div공간 마련 -->
 	<div style="margin-left: 40px">
 		<div id="replies"></div>
 	</div>
@@ -81,6 +96,8 @@
 			// 게시판 댓글 전체 가져오기
 			function getAllReplies() {
 				var boardId = $('#boardId').val();
+				var memberId = $('#memberId').val();
+				console.log(memberId);
 				var url = 'replies/all?boardId=' + boardId;
 				$.getJSON( // 자동으로 JSON 데이터가 javaScript로 parsing됨
 					url,
@@ -109,11 +126,17 @@
 								+ '<input type="text" class="replyContent" value="' + this.replyContent + '" readonly/>'
 								+ '&nbsp;&nbsp;'
 								+ replyDateCreated
-								+ '&nbsp;&nbsp;'
-								+ '<button class="btn_update">수정</button>'
-								+ '<button class="btn_delete">삭제</button>'
-								+ '</pre>'
+								+ '&nbsp;&nbsp;';
+								if (memberId == this.memberId) {
+									replyList += '<button class="btn_update">수정</button>'
+									+ '<button class="btn_delete">삭제</button>';
+								} else {
+									replyList += '<button class="btn_update" disabled>수정</button>'
+									+ '<button class="btn_delete" disabled>삭제</button>';
+								}
+							replyList += '</pre>'
 								+ '</div>';
+								console.log(replyList);
 						}); // end data.each
 						$('#replies').html(replyList); // 반복문으로 생성된 html태그 출력
 					}

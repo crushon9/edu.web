@@ -12,4 +12,6 @@ public interface ReplyDAO {
 	public abstract int update(ReplyVO vo);
 
 	public abstract int delete(int replyId);
+	
+	public abstract int getTotalCounts(int boardId);
 }

@@ -59,6 +59,9 @@ public class ReplyController extends HttpServlet {
 		} else if (requestURI.contains("delete")) {
 			System.out.println("replies/delete 호출확인");
 			replyDelete(request, response);
+		} else if (requestURI.contains("count")) {
+			System.out.println("replies/count 호출확인");
+			replyCount(request, response);
 		}
 	} // end controlURI
 
@@ -132,4 +135,11 @@ public class ReplyController extends HttpServlet {
 			response.getWriter().append("success");
 		}
 	} // end replyDelete
+
+	private void replyCount(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int count = dao.getTotalCounts(boardId);
+		response.getWriter().append(Integer.valueOf(count).toString());
+	} // end replyCount
 }

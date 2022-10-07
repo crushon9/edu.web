@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import edu.web.board.domain.BoardVO;
 import edu.web.board.persistence.BoardDAO;
 import edu.web.board.persistence.BoardDAOImple;
+import edu.web.board.persistence.ReplyDAO;
 import edu.web.board.util.PageCriteria;
 import edu.web.board.util.PageMaker;
 
@@ -129,9 +132,23 @@ public class BoardController extends HttpServlet {
 	// register.jsp를 forward 호출
 	private void registerGET(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = BOARD_URL + REGISTER + EXTENSION; // WEB-INF/board/register.jsp
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		// 로그인 세션을 검사 한 뒤
+		HttpSession session = request.getSession();
+		String memberIdSession = (String) session.getAttribute("memberId");
+		// 세션이 유효할때 글작성 페이지로 forward
+		if (memberIdSession != null) {
+			String path = BOARD_URL + REGISTER + EXTENSION; // WEB-INF/board/register.jsp
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+		} else { // 로그인 세션이 유효하지 않다면
+			// session에 targetURL 저장하고
+			session.setAttribute("targetURL", REGISTER + SERVER_EXTENSION);
+			PrintWriter out = response.getWriter();
+			out.print("<head><meta charset='UTF-8'></head>");
+			out.print("<script>alert('로그인 후 글작성 가능합니다')</script>");
+			// get방식으로 로그인 페이지 호출
+			out.print("<script>location.href='login.go';</script>"); 
+		}
 	} // end registerGET
 
 	// register.jsp에서 등록된 정보를 DB로 insert하고 alert후 index.jsp

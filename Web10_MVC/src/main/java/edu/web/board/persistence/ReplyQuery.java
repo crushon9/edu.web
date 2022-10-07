@@ -23,4 +23,7 @@ public interface ReplyQuery {
 
 	// 특정 댓글 삭제
 	public static final String SQL_DELETE = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_REPLY_ID + " = ?";
+	
+	// 특정 게시글 전체 댓글 갯수
+	public static final String SQL_SELECT_CNT = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COL_BOARD_ID + " = ?";
 }

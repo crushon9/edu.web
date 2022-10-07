@@ -87,7 +87,7 @@ public class ReplyController extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-	}
+	} // end replyAdd
 
 	private void replyList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -95,7 +95,8 @@ public class ReplyController extends HttpServlet {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		// DB에서 댓글 목록을 리스트에 담음
 		List<ReplyVO> list = dao.select(boardId);
-		// JSONArray에 List를 풀어서 하나씩 담음
+		// JSONObject 와 JSONArray는 JSON 문법에 맞춰 key value로 데이터를 변환해주는 라이브러리
+		// JSONArray에 List<ReplyVO>를 풀어서 하나씩 담음
 		JSONArray jsonArr = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
 			JSONObject jsonObj = new JSONObject();
@@ -104,20 +105,31 @@ public class ReplyController extends HttpServlet {
 			jsonObj.put("boardId", vo.getBoardId());
 			jsonObj.put("memberId", vo.getMemberId());
 			jsonObj.put("replyContent", vo.getReplyContent());
-			jsonObj.put("replyDateCreated", vo.getReplyDateCreated().toString()); // Date 타입 인식불가하여 toString 
+			jsonObj.put("replyDateCreated", vo.getReplyDateCreated().toString()); // Date 타입 인식불가하여 toString으로 변환
 			jsonArr.add(jsonObj);
 		}
+		System.out.println(jsonArr);
 		// response에 JSONArray을 담음
 		response.getWriter().append(jsonArr.toString());
-	}
+	} // end replyList
 
 	private void replyUpdate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-	}
+		int replyId = Integer.parseInt(request.getParameter("replyId")); // POST방식도 getParameter로 받아지네
+		String replyContent = request.getParameter("replyContent");
+		ReplyVO vo = new ReplyVO(replyId, 0, "", replyContent, null);
+		int result = dao.update(vo);
+		if (result == 1) {
+			response.getWriter().append("success");
+		}
+	} // end replyUpdate
 
 	private void replyDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-	}
+		int replyId = Integer.parseInt(request.getParameter("replyId"));
+		int result = dao.delete(replyId);
+		if (result == 1) {
+			response.getWriter().append("success");
+		}
+	} // end replyDelete
 }

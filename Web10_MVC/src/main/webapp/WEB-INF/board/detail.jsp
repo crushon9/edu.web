@@ -71,14 +71,14 @@
 					success : function(result) {
 						console.log(result);
 						if (result == 'success') {
-							getAllReplies(); // 댓글가져오기
+							// 성공하면 댓글 가져오기
+							getAllReplies();
 						}
 					} // end ajax.success.function
 				}); // end ajax
 			}); // end btn_add.click
 
 			// 게시판 댓글 전체 가져오기
-
 			function getAllReplies() {
 				var boardId = $('#boardId').val();
 				var url = 'replies/all?boardId=' + boardId;
@@ -91,31 +91,84 @@
 						var replyList = '';
 					
 						// $(컬렉션).each() : 컬렉션 데이터를 반복문으로 꺼내는 함수
+						// 댓글 한줄씩 반복문으로 생성
 						$(data).each(function() {
-							// this : 컬렉션의 한줄데이터를 의미
+							// this : data 컬렉션의 한줄 데이터를 의미
 							console.log(this);
 							// string 날짜를 다시 Date로 변환
 							var replyDateCreated = new Date(this.replyDateCreated);
-							// 댓글 한줄씩 반복문으로 생성
-							replyList += '<div class="reply_item">'
+							replyList += '<div class="reply_item">' // 여러개가 생성될거니깐 class를 부여했고, 댓글 한줄마다 호출시 구분해주는 역할
 								+ '<pre>'
-								+ '<input type="hidden" id="replayId" value="' + this.replayId + '"/>'
-								+ '<input type="hidden" id="memberId" value="' + this.memberId + '"/>'
-								+ this.memberId
+								// <pre> 태그로 감싼 문장은 입력한 문장 형태 그대로 브라우저에 표현할 수 있습니다.
+								// 예를 들어 엔터(Enter), 탭(Tab), 스페이스바(Space) 는 pre 를 사용하지 않았을 때 무조건 공백 하나로 인식합니다.
+								// 하지만 pre 를 사용하게 되면 HTML 형태 그대로 유지가 가능합니다.
+								+ '<input type="hidden" class="replyId" value="' + this.replyId + '"/>'
+								+ '<input type="hidden" class="memberId" value="' + this.memberId + '"/>'
+								+ this.memberId // getJSON으로 받아온 data에 저장된 memberId 의미
 								+ '&nbsp;&nbsp;'
-								+ '<input type="text" id="replyContent" value="' + this.replyContent + '" readonly/>'
+								+ '<input type="text" class="replyContent" value="' + this.replyContent + '" readonly/>'
 								+ '&nbsp;&nbsp;'
 								+ replyDateCreated
 								+ '&nbsp;&nbsp;'
-								+ '<button id="btn_update">수정</button>'
-								+ '<button id="btn_delete">삭제</button>'
+								+ '<button class="btn_update">수정</button>'
+								+ '<button class="btn_delete">삭제</button>'
 								+ '</pre>'
 								+ '</div>';
-						});
-						$('#replies').html(replyList);
+						}); // end data.each
+						$('#replies').html(replyList); // 반복문으로 생성된 html태그 출력
 					}
 				); // end getJSON
 			} // end getAllReplies
+			
+			// 수정 버튼을 클릭하면 댓글 수정
+			$('#replies').on('click', '.reply_item .btn_update', function(){
+				var isReadOnly = $(this).prevAll('.replyContent').prop('readonly');
+				if (isReadOnly == true) { // readonly가 true면
+					// readonly 속성제거 후 버튼 변경
+					$(this).prevAll('.replyContent').removeAttr('readonly');
+					$(this).prevAll('.replyContent').css({"border-color":"red"});
+					$(this).text("수정확인");
+					$(this).nextAll('.btn_delete').hide();
+				} else { // 아니라면 댓글 수정
+					console.log(this); // this : 선택된 btn_update
+					// 선택된 댓글의 replyId, replyContent 값을 저장
+					// prevAll() : 선택된 노드 이전에 위치해 있는 모든 형제 노드를 접근
+					var replyId = $(this).prevAll('.replyId').val();
+					var replyContent = $(this).prevAll('.replyContent').val();
+					console.log("replyId : " + replyId + ", replyContent : " + replyContent);
+					// ajax로 서버로 데이터 전송
+					$.ajax({
+						type : 'POST',
+						url : 'replies/update',
+						data : {
+							'replyId' : replyId,
+							'replyContent' : replyContent
+						},
+						success : function(result) {
+							console.log("댓글수정결과" + result);
+							getAllReplies();
+						}
+					});
+				}
+			}); // end replies.on.btn_update
+			
+			// 삭제 버튼을 클릭하면 선택된 댓글 삭제
+			$('#replies').on('click', '.reply_item .btn_delete', function(){
+				console.log(this);
+				var replyId = $(this).prevAll('.replyId').val();
+				console.log("replyId : " + replyId);
+				$.ajax({
+					type : 'POST',
+					url : 'replies/delete',
+					data : {
+						'replyId' : replyId,
+					},
+					success : function(result) {
+						console.log(result);
+						getAllReplies();
+					}
+				});
+			}); // end replies.on.btn_delete
 			
 
 		}); // end document

@@ -26,6 +26,8 @@ li {
 </head>
 <body>
 	<h1>게시판 메인</h1>
+	<a href="login.go">로그인</a>
+	
 	<!-- register.jsp 아니라 register.do! -->
 	<a href="register.do"><input type="button" value="글작성"></a>
 	<hr>

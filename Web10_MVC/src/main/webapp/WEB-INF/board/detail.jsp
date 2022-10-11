@@ -97,7 +97,6 @@
 			function getAllReplies() {
 				var boardId = $('#boardId').val();
 				var memberId = $('#memberId').val();
-				console.log(memberId);
 				var url = 'replies/all?boardId=' + boardId;
 				$.getJSON( // 자동으로 JSON 데이터가 javaScript로 parsing됨
 					url,
@@ -114,6 +113,10 @@
 							console.log(this);
 							// string 날짜를 다시 Date로 변환
 							var replyDateCreated = new Date(this.replyDateCreated);
+							var btn_disabled = 'disabled';
+							if (memberId == this.memberId) {
+								btn_disabled = '';
+							}
 							replyList += '<div class="reply_item">' // 여러개가 생성될거니깐 class를 부여했고, 댓글 한줄마다 호출시 구분해주는 역할
 								+ '<pre>'
 								// <pre> 태그로 감싼 문장은 입력한 문장 형태 그대로 브라우저에 표현할 수 있습니다.
@@ -126,15 +129,10 @@
 								+ '<input type="text" class="replyContent" value="' + this.replyContent + '" readonly/>'
 								+ '&nbsp;&nbsp;'
 								+ replyDateCreated
-								+ '&nbsp;&nbsp;';
-								if (memberId == this.memberId) {
-									replyList += '<button class="btn_update">수정</button>'
-									+ '<button class="btn_delete">삭제</button>';
-								} else {
-									replyList += '<button class="btn_update" disabled>수정</button>'
-									+ '<button class="btn_delete" disabled>삭제</button>';
-								}
-							replyList += '</pre>'
+								+ '&nbsp;&nbsp;'
+								+ '<button class="btn_update" ' + btn_disabled + '>수정</button>'
+								+ '<button class="btn_delete" ' + btn_disabled + '>삭제</button>'
+								+ '</pre>'
 								+ '</div>';
 								console.log(replyList);
 						}); // end data.each

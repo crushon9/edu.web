@@ -120,6 +120,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("이전버튼 " + pageMaker.isHasPrev());
 			System.out.println("다음버큰 " + pageMaker.isHasNext());
 			request.setAttribute("pageMaker", pageMaker);
+			// 댓글 수 전송
 			dispatcher.forward(request, response);
 		} else {
 			PrintWriter out = response.getWriter();

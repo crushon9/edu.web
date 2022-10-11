@@ -81,25 +81,6 @@ li {
 		</select>
 		<input type="submit" value="적용">
 	</form>
-	
-<!-- 	<script type="text/javascript">
-	$(document).ready(function() {
-		$.ajax({
-			type : "POST",
-			url : "replies/count",
-			data : {
-				'boardId' : JSON.stringify(obj)
-			}, 
-			success : function(result) {
-				console.log(result);
-				if (result == 'success') {
-					// 성공하면 댓글 가져오기
-					getAllReplies();
-				}
-			} // end ajax.success.function
-		}); // end ajax
-	}
-	</script> -->
 
 </body>
 </html>

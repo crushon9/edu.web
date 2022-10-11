@@ -158,7 +158,7 @@ public class BoardController extends HttpServlet {
 		String boardTitle = request.getParameter("boardTitle");
 		String memberId = request.getParameter("memberId");
 		String boardContent = request.getParameter("boardContent");
-		BoardVO vo = new BoardVO(0, boardTitle, memberId, boardContent, null);
+		BoardVO vo = new BoardVO(0, boardTitle, boardContent, memberId, null);
 		System.out.println(vo);
 		int result = dao.insert(vo);
 		System.out.println("insert 결과 : " + result);

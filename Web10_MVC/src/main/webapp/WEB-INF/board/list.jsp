@@ -51,7 +51,7 @@ li {
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.boardId}</td>
-					<td><a href="detail.do?boardId=${vo.boardId}">${vo.boardTitle} (댓글 : )</a></td>
+					<td><a href="detail.do?boardId=${vo.boardId}">${vo.boardTitle}</a></td>
 					<td>${vo.memberId}</td>
 					<td>${vo.boardDateCreated}</td>
 				</tr>

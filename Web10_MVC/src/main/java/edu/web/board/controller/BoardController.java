@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import edu.web.board.domain.BoardVO;
 import edu.web.board.persistence.BoardDAO;
 import edu.web.board.persistence.BoardDAOImple;
-import edu.web.board.persistence.ReplyDAO;
 import edu.web.board.util.PageCriteria;
 import edu.web.board.util.PageMaker;
 

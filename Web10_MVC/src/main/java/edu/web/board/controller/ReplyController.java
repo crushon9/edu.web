@@ -1,24 +1,17 @@
 package edu.web.board.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import edu.web.board.domain.ReplyVO;
-import edu.web.board.persistence.BoardDAO;
-import edu.web.board.persistence.BoardDAOImple;
 import edu.web.board.persistence.ReplyDAO;
 import edu.web.board.persistence.ReplyDAOImple;
 
@@ -59,9 +52,6 @@ public class ReplyController extends HttpServlet {
 		} else if (requestURI.contains("delete")) {
 			System.out.println("replies/delete 호출확인");
 			replyDelete(request, response);
-		} else if (requestURI.contains("count")) {
-			System.out.println("replies/count 호출확인");
-			replyCount(request, response);
 		}
 	} // end controlURI
 
@@ -136,10 +126,4 @@ public class ReplyController extends HttpServlet {
 		}
 	} // end replyDelete
 
-	private void replyCount(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
-		int count = dao.getTotalCounts(boardId);
-		response.getWriter().append(Integer.valueOf(count).toString());
-	} // end replyCount
 }

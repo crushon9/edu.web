@@ -115,26 +115,4 @@ public class ReplyDAOImple implements ReplyDAO, ReplyQuery {
 		return result;
 	}
 
-	@Override
-	public int getTotalCounts(int boardId) {
-		int count = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		conn = ConnMgr.getConnection();
-		try {
-			pstmt = conn.prepareStatement(SQL_SELECT_CNT);
-			pstmt.setInt(1, boardId);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnMgr.close(conn, pstmt, rs);
-		}
-		return count;
-	}
-
 }

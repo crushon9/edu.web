@@ -33,6 +33,7 @@ public class BoardController extends HttpServlet {
 
 	public BoardController() {
 		dao = BoardDAOImple.getInstance();
+		
 	}
 
 	// WEB-INF 하위에 jsp 파일을 두면, 컨트롤러를 통해서만 접근가능하며 직접주소로는 404에러 발생
@@ -58,7 +59,6 @@ public class BoardController extends HttpServlet {
 		if (requestURI.contains(LIST + SERVER_EXTENSION)) {
 			System.out.println("listGET 호출확인");
 			listGET(request, response);
-
 			// register.do
 		} else if (requestURI.contains(REGISTER + SERVER_EXTENSION)) {
 			if (requestMethod.equals("GET")) { // GET방식 (페이지불러오기)
